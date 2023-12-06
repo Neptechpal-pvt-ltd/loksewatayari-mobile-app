@@ -1,4 +1,4 @@
-# loksewamobileapp
+# loksewa
 
 A new Flutter project.
 
