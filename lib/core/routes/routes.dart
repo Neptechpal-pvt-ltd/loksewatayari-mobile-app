@@ -12,6 +12,8 @@ class Routes {
   static const String askqsn = "/AskQuestion";
   static const String resourceView = "/ResourceView";
   static const String editAccount = "/EditAccount";
+  static const String loksewavideo = "/LoksewaVideo";
+
 
 
 

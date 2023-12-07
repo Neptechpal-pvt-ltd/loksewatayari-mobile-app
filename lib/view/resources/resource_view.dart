@@ -40,26 +40,49 @@ class ResourcesView extends StatelessWidget {
             Divider(),
             SizedBox(
               width: 390,
-              height: 169,
+              height: 200,
               child: Stack(
                 children: <Widget>[
-                  const Image(image: AssetImage(AssetsPath.resource)),
+                  Container(
+                    height: 200,
+                    // color: Colors.white,s
+                  ),
+                  // Container(
+                  //   height: 100,
+                  //   color: Colors.blue,
+                  // ),
+                  Image(
+                      image: AssetImage(AssetsPath.resource),
+                      width: MediaQuery.sizeOf(context).width * 1.5),
                   Positioned(
-                    top: 100,
+                    top: MediaQuery.sizeOf(context).height * 0.15,
                     // bottom: 5,
-                    left: 20,
+                    left: MediaQuery.sizeOf(context).width * 0.09,
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.09,
                       width: 319,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff101828)
+                                  .withOpacity(0.1), // Shadow color
+                              spreadRadius: 0, // How much to spread the shadow
+                              blurRadius: 8, // How much to blur the shadow
+                              offset: Offset(
+                                  0, 4), // Changes the position of the shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(10),
                           color: Colors.white),
                       child: Center(
-                        child: Text(
-                          "Today's Fresh Objective Questions and Answers on Public Services.",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            "Today's Fresh Objective Questions and Answers on Public Services.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),

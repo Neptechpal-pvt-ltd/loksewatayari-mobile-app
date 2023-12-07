@@ -7,6 +7,7 @@ import 'package:loksewa/view/login/login_view.dart';
 import 'package:loksewa/view/login/select_career.dart';
 import 'package:loksewa/view/login/select_course.dart';
 import 'package:loksewa/view/profile/edit_account.dart';
+import 'package:loksewa/view/profile/loksewavideo.dart';
 import 'package:loksewa/view/profile/prepare_loksewa.dart';
 import 'package:loksewa/view/profile/trackprogress.dart';
 import 'package:loksewa/view/quiz/qsnpart.dart';
@@ -51,6 +52,8 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => TrackMyProgress() );
           case Routes.prepareloksewa:
         return MaterialPageRoute(builder: (_) => PrepareLoksewa() );
+          case Routes.loksewavideo:
+        return MaterialPageRoute(builder: (_) => LOksewaVideo());
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
     }
