@@ -32,21 +32,21 @@ class ProfileView extends StatelessWidget {
         body: ListView(children: [
           Column(
             children: [
-              CustomAppbar(
+              const CustomAppbar(
                 text: "Profile",
               ),
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage(AssetsPath.profile),
               ),
-              Text(
+              const Text(
                 "Bryan Adam",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                     color: Color(0xff151B28)),
               ),
-              Text(
+              const Text(
                 "bryan.adam87@gmail.com",
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -106,8 +106,8 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+           const    Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -121,7 +121,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
               Container(
-                height: MediaQuery.sizeOf(context).height * 0.45,
+                height: MediaQuery.sizeOf(context).height * 0.35,
                 child: ListView.builder(
                     itemCount: profileAccount.length,
                     itemBuilder: (context, index) {
@@ -147,28 +147,33 @@ class ProfileView extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(15.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
                                         child: SvgPicture.asset(
                                             AssetsPath().profileAccount[index]),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
                                       Text(profileAccount[index]),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
                                     child:
                                         Icon(Icons.arrow_forward_ios_outlined),
                                   )
                                 ],
                               ),
+                              const Divider()
                             ],
                           ),
                         ),
                       );
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -182,7 +187,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
               Container(
-                height: MediaQuery.sizeOf(context).height * 0.85,
+                height: MediaQuery.sizeOf(context).height * 0.70,
                 child: ListView.builder(
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
@@ -196,19 +201,23 @@ class ProfileView extends StatelessWidget {
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(15.0),
+                                      padding: const EdgeInsets.only(left: 15),
                                       child: SvgPicture.asset(
                                           AssetsPath().profileGeneral[index]),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
                                     ),
                                     Text(profileGeneral[index]),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.arrow_forward_ios_outlined),
                                 )
                               ],
                             ),
+                            const Divider()
                           ],
                         ),
                       );

@@ -18,7 +18,7 @@ class ResourcesView extends StatelessWidget {
       child: Scaffold(
         body: ListView(
           children: [
-            CustomAppbar(
+            const CustomAppbar(
               text: "Resources",
             ),
             Row(
@@ -33,11 +33,11 @@ class ResourcesView extends StatelessWidget {
                         isContinueButtonPurple ? AppColor.primaryColor : null,
                   ),
                 ),
-                Text("Gorkha Patra"),
-                Text("Vacancy Posts")
+                const Text("Gorkha Patra"),
+                const Text("Vacancy Posts")
               ],
             ),
-            Divider(),
+            const Divider(),
             SizedBox(
               width: 390,
               height: 200,
@@ -52,7 +52,7 @@ class ResourcesView extends StatelessWidget {
                   //   color: Colors.blue,
                   // ),
                   Image(
-                      image: AssetImage(AssetsPath.resource),
+                      image: const AssetImage(AssetsPath.resource),
                       width: MediaQuery.sizeOf(context).width * 1.5),
                   Positioned(
                     top: MediaQuery.sizeOf(context).height * 0.15,
@@ -64,19 +64,19 @@ class ResourcesView extends StatelessWidget {
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0xff101828)
+                              color: const Color(0xff101828)
                                   .withOpacity(0.1), // Shadow color
                               spreadRadius: 0, // How much to spread the shadow
                               blurRadius: 8, // How much to blur the shadow
-                              offset: Offset(
+                              offset: const Offset(
                                   0, 4), // Changes the position of the shadow
                             ),
                           ],
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white),
-                      child: Center(
+                      child: const Center(
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: EdgeInsets.all(15.0),
                           child: Text(
                             "Today's Fresh Objective Questions and Answers on Public Services.",
                             style: TextStyle(
@@ -91,8 +91,8 @@ class ResourcesView extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   Text(
@@ -108,8 +108,8 @@ class ResourcesView extends StatelessWidget {
             ),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 5, // Replace with your actual item count
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -118,12 +118,12 @@ class ResourcesView extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff101828)
-                              .withOpacity(0.1), // Shadow color
-                          spreadRadius: 0, // How much to spread the shadow
-                          blurRadius: 8, // How much to blur the shadow
-                          offset: Offset(
-                              0, 4), // Changes the position of the shadow
+                          color: const Color(0xff101828)
+                              .withOpacity(0.1), 
+                          spreadRadius: 0, 
+                          blurRadius: 8, 
+                          offset: const Offset(
+                              0, 4), 
                         ),
                       ],
                     ),
@@ -135,11 +135,11 @@ class ResourcesView extends StatelessWidget {
                         ),
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.5,
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(8.0),
                                 child: Text(
                                   "May 16, 2021",
                                   style: TextStyle(
@@ -150,7 +150,7 @@ class ResourcesView extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(8.0),
                                 child: Text(
                                   "Today's Fresh Objective Questions and Answers on Public Services",
                                   style: TextStyle(

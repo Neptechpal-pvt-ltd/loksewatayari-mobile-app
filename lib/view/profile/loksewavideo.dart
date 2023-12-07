@@ -11,7 +11,7 @@ class LOksewaVideo extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            CustomAppbar(
+            const CustomAppbar(
               text: "Introduction of Loksewa Exam",
             ),
             SizedBox(

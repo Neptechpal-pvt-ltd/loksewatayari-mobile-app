@@ -45,15 +45,15 @@ class RouterGenerator {
       case Routes.askqsn:
         return MaterialPageRoute(builder: (_) => const AskQsn());
       case Routes.resourceView:
-        return MaterialPageRoute(builder: (_) =>  ResourcesView());
+        return MaterialPageRoute(builder: (_) =>  const ResourcesView());
             case Routes.editAccount:
-        return MaterialPageRoute(builder: (_) =>  EditAccount());
+        return MaterialPageRoute(builder: (_) =>  const EditAccount());
                     case Routes.trackProgress:
         return MaterialPageRoute(builder: (_) => TrackMyProgress() );
           case Routes.prepareloksewa:
         return MaterialPageRoute(builder: (_) => PrepareLoksewa() );
           case Routes.loksewavideo:
-        return MaterialPageRoute(builder: (_) => LOksewaVideo());
+        return MaterialPageRoute(builder: (_) => const LOksewaVideo());
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
     }

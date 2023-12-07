@@ -6,6 +6,7 @@ import 'package:loksewa/view_model.dart/dashboard_view_model.dart';
 import 'package:loksewa/view_model.dart/onboarding_view_model.dart';
 import 'package:loksewa/view_model.dart/select_view_model.dart';
 import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
+import 'package:loksewa/view_model.dart/selectcoursemodel.dart';
 import 'package:loksewa/view_model.dart/theme_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -21,24 +22,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<OnboardViewModel>(create: (_)=>OnboardViewModel()),
-        ChangeNotifierProvider<SelectedViewModel>(create: (_)=>SelectedViewModel()),
-        ChangeNotifierProvider<SelectboxViewModel>(create: (_)=>SelectboxViewModel()),
-
-        ChangeNotifierProvider<DashboardViewModel>(create: (_)=>DashboardViewModel()),
-
-
-        ChangeNotifierProvider<ThemeViewModel>(create: (_)=>ThemeViewModel(ThemeData.light())),
-
+        ChangeNotifierProvider<OnboardViewModel>(
+            create: (_) => OnboardViewModel()),
+        ChangeNotifierProvider<CourseSelectionModel>(
+            create: (_) => CourseSelectionModel()),
+        ChangeNotifierProvider<SelectedViewModel>(
+            create: (_) => SelectedViewModel()),
+        ChangeNotifierProvider<SelectboxViewModel>(
+            create: (_) => SelectboxViewModel()),
+        ChangeNotifierProvider<DashboardViewModel>(
+            create: (_) => DashboardViewModel()),
+        ChangeNotifierProvider<ThemeViewModel>(
+            create: (_) => ThemeViewModel(ThemeData.light())),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        
-theme: AppTheme.light,
-darkTheme: AppTheme.dark,
-        onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-        home: const SplashScreen()
-      ),
+          title: 'Flutter Demo',
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
+          home: const SplashScreen()),
     );
   }
 }

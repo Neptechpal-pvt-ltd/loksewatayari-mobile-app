@@ -17,11 +17,11 @@ class PrepareLoksewa extends StatelessWidget {
       child: Scaffold(
         body: ListView(
           children: [
-            CustomAppbar(
+            const CustomAppbar(
               text: "How to Prepare for Loksewa Exam?",
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 8),
+            const Padding(
+              padding: EdgeInsets.only(left: 15, right: 15, top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -48,6 +48,8 @@ class PrepareLoksewa extends StatelessWidget {
                   itemCount: 3,
                   itemBuilder: (BuildContext context, int index) {
                     int itemIndex = index + 1;
+                    String formattedIndex =
+                        itemIndex.toString().padLeft(2, '0');
                     return GestureDetector(
                       onTap: () {
                         switch (index) {
@@ -60,19 +62,19 @@ class PrepareLoksewa extends StatelessWidget {
                         }
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Container(
                           height: 68,
                           decoration: BoxDecoration(
-                            color: AppColor.borderColor,
+                            color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0xff101828)
+                                color: const Color(0xff101828)
                                     .withOpacity(0.4), // color of the shadow
                                 spreadRadius: 0, // spread radius
                                 blurRadius: 2, // blur radius
                                 offset: const Offset(
-                                    1, 2), // changes position of shadow
+                                    0, 1), // changes position of shadow
                               ),
                             ],
                           ),
@@ -85,10 +87,10 @@ class PrepareLoksewa extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: CircleAvatar(
-                                      backgroundColor: Color(0xffEFEFF1),
+                                      backgroundColor: const Color(0xffEFEFF1),
                                       child: Text(
                                         '$itemIndex',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: AppColor.primaryColor),
                                       ),
                                     ),
@@ -101,19 +103,19 @@ class PrepareLoksewa extends StatelessWidget {
                                       children: [
                                         Text(
                                           introduction[index],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 16,
                                               color: Color(0xff151B2B)),
                                         ),
-                                        Text("10 mins")
+                                        const Text("10 mins")
                                       ],
                                     ),
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Icon(
                                   Icons.video_collection,
                                   color: AppColor.primaryColor,

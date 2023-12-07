@@ -14,7 +14,7 @@ class AskQsn extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            CustomAppbar(
+            const CustomAppbar(
               text: "Ask your Question",
             ),
             Expanded(
@@ -29,7 +29,7 @@ class AskQsn extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "What's your Question?",
                       border: InputBorder.none,
                     ),
@@ -59,9 +59,9 @@ class AskQsn extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             SvgPicture.asset(AssetsPath.camera),
-                                            Padding(
+                                            const Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
+                                                  EdgeInsets.all(8.0),
                                               child: Text(
                                                   "Take Photo From Camera"),
                                             )
@@ -74,9 +74,9 @@ class AskQsn extends StatelessWidget {
                                           children: [
                                             SvgPicture.asset(
                                                 AssetsPath.photogalery),
-                                            Padding(
+                                            const Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
+                                                  EdgeInsets.all(8.0),
                                               child: Text(
                                                   "Select Photo From Gallery"),
                                             )
@@ -105,10 +105,10 @@ class AskQsn extends StatelessWidget {
                           child: Row(
                             children: [
                               SvgPicture.asset(AssetsPath.gallery),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Text("Add Image")
+                              const Text("Add Image")
                             ],
                           ),
                         ),
@@ -118,10 +118,10 @@ class AskQsn extends StatelessWidget {
                         child: Row(
                           children: [
                             SvgPicture.asset(AssetsPath.tags),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Text("Add Tags")
+                            const Text("Add Tags")
                           ],
                         ),
                       ),
@@ -130,17 +130,17 @@ class AskQsn extends StatelessWidget {
                         child: Row(
                           children: [
                             SvgPicture.asset(AssetsPath.link),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Text("Add Link")
+                            const Text("Add Link")
                           ],
                         ),
                       )
                     ],
                   ),
                 )),
-            NavButton(
+            const NavButton(
               btnText: "Post Question",
               color: AppColor.primaryColor,
               textColor: AppColor.borderColor,
