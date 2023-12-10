@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:loksewa/core/routes/router_generator.dart';
 import 'package:loksewa/core/themes/app_theme.dart';
 import 'package:loksewa/view/splash_onboard/splash_screen.dart';
 import 'package:loksewa/view_model.dart/dashboard_view_model.dart';
+import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:loksewa/view_model.dart/onboarding_view_model.dart';
 import 'package:loksewa/view_model.dart/select_view_model.dart';
 import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
@@ -10,7 +12,8 @@ import 'package:loksewa/view_model.dart/selectcoursemodel.dart';
 import 'package:loksewa/view_model.dart/theme_view_model.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main()async {
+ await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -22,6 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+         ChangeNotifierProvider<AuthProvider>(
+            create: (_) => AuthProvider()),
         ChangeNotifierProvider<OnboardViewModel>(
             create: (_) => OnboardViewModel()),
         ChangeNotifierProvider<CourseSelectionModel>(
