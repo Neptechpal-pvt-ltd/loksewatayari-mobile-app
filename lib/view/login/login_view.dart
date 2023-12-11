@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
@@ -7,6 +8,7 @@ import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
 import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
 import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
@@ -19,18 +21,11 @@ class LogInView extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           body: Column(
             children: [
-                      Row(
-                        children: [
-                          const CustomAppbar(),
-              //             ElevatedButton(onPressed: (){
-              //  if (themeViewModel.getTheme().brightness == Brightness.light) {
-              //           themeViewModel.setTheme(ThemeData.dark());
-              //         } else {
-              //           themeViewModel.setTheme(ThemeData.light());
-              //         }
-              //             }, child: const Text("Switch Theme"))
-                        ],
-                      ),
+              Row(
+                children: [
+                  const CustomAppbar(),
+                ],
+              ),
               const Expanded(
                   flex: 4,
                   child: Column(
@@ -74,6 +69,7 @@ class LogInView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
+                          cursorColor: AppColor.primaryColor,
                           controller:
                               context.read<AuthProvider>().usernameController,
                           decoration: InputDecoration(
@@ -102,6 +98,7 @@ class LogInView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
+                          cursorColor: AppColor.primaryColor,
                           controller:
                               context.read<AuthProvider>().passwordController,
                           obscureText: true,
@@ -134,9 +131,14 @@ class LogInView extends StatelessWidget {
                           onTap: () async {
                             await authProvider.authenticateUser();
                             if (authProvider.isAuthenticated) {
+                              // SharedPreferences prefs =
+                              //     await SharedPreferences.getInstance();
+                                  
+                              // prefs.setString('accessToken', 'your_access_token');
+                              // prefs.setString('refreshToken', 'your_refresh_token');
+
                               Navigator.pushNamed(context, Routes.career);
                             }
-                     
                           },
                           child: const NavButton(
                             btnText: "LogIn",
@@ -181,7 +183,7 @@ class LogInView extends StatelessWidget {
                 height: 35,
               ),
               RichText(
-                  text: const TextSpan(children: <TextSpan>[
+                  text: TextSpan(children: <TextSpan>[
                 TextSpan(
                   text: "Already Have an Account? ",
                   style: TextStyle(
@@ -191,12 +193,14 @@ class LogInView extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                    text: "Sign In",
+                    text: 'Sign In',
                     style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColor.primaryColor,
-                    ))
+                        fontStyle: FontStyle.italic,
+                        color: AppColor.primaryColor),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, Routes.signUp);
+                      }),
               ]))
             ],
           ),

@@ -83,5 +83,8 @@ class AssetsPath {
     '${_iconPath}shareapp.svg',
     '${_iconPath}logout.svg',
   ];
+//loksewa logo new
+  static const String loksewanewlogo = '${_imagePath}loksewa.jpg';
+
 
 }
