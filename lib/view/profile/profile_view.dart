@@ -4,6 +4,7 @@ import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatelessWidget {
   List<String> profileAccount = [
@@ -106,7 +107,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-           const    Padding(
+              const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
@@ -191,34 +192,49 @@ class ProfileView extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 15),
-                                      child: SvgPicture.asset(
-                                          AssetsPath().profileGeneral[index]),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(profileGeneral[index]),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(Icons.arrow_forward_ios_outlined),
-                                )
-                              ],
-                            ),
-                            const Divider()
-                          ],
+                      return GestureDetector(
+                        onTap: () async {
+                          switch (index) {
+                            case 7:
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              final bool isLoggedIn =
+                                  prefs.getBool('isLoggedIn') ?? false;
+                              Navigator.pushNamed(context, Routes.logIn);
+                          }
+                        },
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: SvgPicture.asset(
+                                            AssetsPath().profileGeneral[index]),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(profileGeneral[index]),
+                                    ],
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child:
+                                        Icon(Icons.arrow_forward_ios_outlined),
+                                  )
+                                ],
+                              ),
+                              const Divider()
+                            ],
+                          ),
                         ),
                       );
                     }),

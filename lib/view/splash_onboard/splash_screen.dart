@@ -3,9 +3,11 @@ import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+
+  SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,13 @@ class SplashScreen extends StatelessWidget {
                     ],
                   )),
               GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.onboarding);
+                  onTap: () async{
+                     SharedPreferences prefs = await SharedPreferences.getInstance();
+                       final bool isLoggedIn = prefs.getBool('isLoggedIn')! ;
+                        isLoggedIn
+
+                        ? Navigator.pushNamed(context, Routes.career)
+                        : Navigator.pushNamed(context, Routes.onboarding);
                   },
                   child: const CircularProgressIndicator(
                     color: AppColor.primaryColor,

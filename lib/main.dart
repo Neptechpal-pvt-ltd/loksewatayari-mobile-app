@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: const SplashScreen()),
+          home:  SplashScreen()),
     );
   }
 }
