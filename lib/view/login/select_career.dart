@@ -14,19 +14,22 @@ class SelectCareer extends StatelessWidget {
     selectedButtonIndex = index;
   }
 
-  final List<Map> texts = [
-    {'title': "+2", 'isSelected': false},
-    {'title': "Bachelor", 'isSelected': false},
-    {'title': "Bachelor", 'isSelected': false},
-    {'title': "Bachelor", 'isSelected': false},
-    {'title': "Bachelor", 'isSelected': false},
-    {'title': "Bachelor", 'isSelected': false},
-  ];
+  var jsonData;
+  
+  // final List<Map> texts = [
+  //   {'title': "+2", 'isSelected': false},
+  //   {'title': "Bachelor", 'isSelected': false},
+  //   {'title': "Bachelor", 'isSelected': false},
+  //   {'title': "Bachelor", 'isSelected': false},
+  //   {'title': "Bachelor", 'isSelected': false},
+  //   {'title': "Bachelor", 'isSelected': false},
+  // ];
 
   SelectCareer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<SelectboxViewModel>(context, listen: false).getData();
     final selectboxViewModel = Provider.of<SelectboxViewModel>(context);
 
     bool isContinueButtonPurple = selectboxViewModel.selectedButtonIndex != -1;
@@ -68,11 +71,12 @@ class SelectCareer extends StatelessWidget {
                 )),
             Expanded(
               flex: 8,
-              child: GridView.count(
+              child: jsonData!=null?
+              GridView.count(
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                children: List.generate(texts.length, (index) {
+                children: List.generate(jsonData.length, (index) {
                   final isSelected =
                       index == selectboxViewModel.selectedButtonIndex;
                   return InkWell(
@@ -92,7 +96,7 @@ class SelectCareer extends StatelessWidget {
                       margin: const EdgeInsets.all(8),
                       child: Center(
                         child: Text(
-                          texts[index]['title'],
+                          jsonData[index]['title'],
                           style: TextStyle(
                               fontSize: 16,
                               color: isSelected
@@ -103,7 +107,7 @@ class SelectCareer extends StatelessWidget {
                     ),
                   );
                 }),
-              ),
+              ):Center(child: CircularProgressIndicator())
             ),
             GestureDetector(
               onTap: () {
