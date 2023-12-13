@@ -15,10 +15,10 @@ class EditAccount extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
-            CustomAppbar(
+            const CustomAppbar(
               text: "Edit Account",
             ),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
               backgroundImage: AssetImage(AssetsPath.profile),
             ),
@@ -46,7 +46,7 @@ class EditAccount extends StatelessWidget {
               title: "Courses",
               hinttxt: "Select Course",
             ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: NavButton(
                 btnText: "Save Changes",

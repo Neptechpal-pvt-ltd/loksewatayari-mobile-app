@@ -18,7 +18,7 @@ class FormTextField extends StatelessWidget {
             children: [
               Text(
                 title!,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff151B28)),
@@ -32,7 +32,7 @@ class FormTextField extends StatelessWidget {
               width: 358,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color(0xffEAEBF0),
+                  color: const Color(0xffEAEBF0),
                 ),
               ),
               child: Padding(
@@ -42,7 +42,7 @@ class FormTextField extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: hinttxt!,
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                           color: Color(0xff5F6D7E),
                           fontWeight: FontWeight.w400,
                           fontSize: 16)),

@@ -16,15 +16,6 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage>
     with SingleTickerProviderStateMixin {
-
-  /// late means it will be initialized letter and it must be initialized before build function
-
-  late Animation _rotationAnimation;
-  double rotation = 0;
-
-  bool visible =
-      false; // to make the stack visible and invisible on the basis of button click
-
   @override
   void initState() {
     // getData();
@@ -36,9 +27,7 @@ class _DashboardPageState extends State<DashboardPage>
   Widget build(BuildContext context) {
     DashboardViewModel dashboardViewModels =
         Provider.of<DashboardViewModel>(context);
-    Size size = MediaQuery.of(context)
-        .size; // This contain the width and height of current device
-    double visibleTop = MediaQuery.of(context).size.height * 0.72;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Consumer<DashboardViewModel>(builder: (_, dashboardViewModel, __) {
@@ -69,24 +58,34 @@ class _DashboardPageState extends State<DashboardPage>
                       children: List.generate(
                           dashboardViewModels.imagePaths.length, (index) {
                         return ButtonNavbar(
-                          onClick: index == 2
-                              ? () {
-                                  // dashboardViewModels.updateIndex(index);
-                                }
-                              : () {
-                                  dashboardViewModels.updateIndex(index);
-                                },
-                          icon: SvgPicture.asset(
-                            dashboardViewModels.imagePaths[index],
-                            // ignore: deprecated_member_use
-                            color: dashboardViewModels.currentIndex == index
-                                ? AppColor.primaryColor
-                                : const Color(0xff49556D),
+                          onClick: () {
+                            dashboardViewModels.updateIndex(index);
+                          },
+                          icon: Column(
+                            children: [
+                              SvgPicture.asset(
+                                dashboardViewModels.imagePaths[index],
+                                // ignore: deprecated_member_use
+                                color: dashboardViewModels.currentIndex == index
+                                    ? AppColor.primaryColor
+                                    : const Color(0xff49556D),
+                              ),
+                              Text(
+                                dashboardViewModels.bottontext[index],
+                                style: TextStyle(
+                                  fontWeight:
+                                      dashboardViewModels.currentIndex == index
+                                          ? FontWeight.w500
+                                          : FontWeight.w400,
+                                  color:
+                                      dashboardViewModels.currentIndex == index
+                                          ? AppColor.primaryColor
+                                          : const Color(0xff49556D),
+                                ),
+                              )
+                            ],
                           ),
                           index: index,
-                          // color: dashboardViewModels.currentIndex == index
-                          //     ? Colors.white
-                          //     : AppColor.borderColor,
                         );
                       }))),
             )

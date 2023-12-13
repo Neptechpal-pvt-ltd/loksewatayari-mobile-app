@@ -33,97 +33,100 @@ class SelectCourse extends StatelessWidget {
 
     return Consumer<SelectedViewModel>(
       builder: (context, selectedViewModel, child) {
-        return Scaffold(
-          body: Column(
-            children: [
-              const CustomAppbar(),
-              const Expanded(
-                  flex: 9,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Image(image: AssetImage(AssetsPath.career)),
-                      ),
-                      Text(
-                        AppString.selectCourse,
-                        style: TextStyle(
-                          color: AppColor.credentialName,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
+        return SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                const CustomAppbar(),
+                const Expanded(
+                    flex: 9,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Image(image: AssetImage(AssetsPath.career)),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(14.0),
-                        child: Text(
-                          AppString.careerdes,
-                          textAlign: TextAlign.center,
+                        Text(
+                          AppString.selectCourse,
                           style: TextStyle(
-                            color: AppColor.textFieldTextColor,
-                            fontSize: 18,
+                            color: AppColor.credentialName,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 28,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                    ],
-                  )),
-              Expanded(
-                  flex: 11,
-                  child: ListView.builder(
-                      itemCount: texts.length,
-                      itemBuilder: (context, index) {
-                        final isSelected =
-                            index == selectboxViewModel.selectedButtonIndex;
-                        return GestureDetector(
-                          onTap: () {
-                            selectboxViewModel.selectButton(index);
-                          },
-                          child: Container(
-                            height: 56,
-                            width: 358,
-                            decoration: BoxDecoration(
-                                color:
-                                    isSelected ? AppColor.primaryColor : null,
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(color: AppColor.borderColor)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 13),
-                              child: Text(
-                                texts[index]['title'],
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: isSelected
-                                        ? AppColor.borderColor
-                                        : Colors.black),
-                              ),
+                        Padding(
+                          padding: EdgeInsets.all(14.0),
+                          child: Text(
+                            AppString.careerdes,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColor.textFieldTextColor,
+                              fontSize: 18,
                             ),
                           ),
-                        );
-                      })),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.dashboard);
-                },
-                child: NavButton(
-                  btnText: "Continue",
-                  color: isContinueButtonPurple
-                      ? AppColor.primaryColor
-                      : AppColor.borderColor,
-                  textColor: isContinueButtonPurple
-                      ? AppColor.borderColor
-                      : AppColor.primaryColor,
-                  onClick: () {
-                    if (selectboxViewModel.selectedButtonIndex != -1) {
-                      selectboxViewModel.clearSelection();
-                    } else {
-                      selectboxViewModel.selectButton(0);
-                    }
+                        ),
+                      ],
+                    )),
+                Expanded(
+                    flex: 11,
+                    child: ListView.builder(
+                        itemCount: texts.length,
+                        itemBuilder: (context, index) {
+                          final isSelected =
+                              index == selectboxViewModel.selectedButtonIndex;
+                          return GestureDetector(
+                            onTap: () {
+                              selectboxViewModel.selectButton(index);
+                            },
+                            child: Container(
+                              height: 56,
+                              width: 358,
+                              decoration: BoxDecoration(
+                                  color:
+                                      isSelected ? AppColor.primaryColor : null,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                      Border.all(color: AppColor.borderColor)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 13),
+                                child: Text(
+                                  texts[index]['title'],
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: isSelected
+                                          ? AppColor.borderColor
+                                          : Colors.black),
+                                ),
+                              ),
+                            ),
+                          );
+                        })),
+                GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(context, Routes.dashboard);
                   },
-                ),
-              )
-            ],
+                  child: NavButton(
+                    btnText: "Continue",
+                    color: isContinueButtonPurple
+                        ? AppColor.primaryColor
+                        : AppColor.borderColor,
+                    textColor: isContinueButtonPurple
+                        ? AppColor.borderColor
+                        : AppColor.primaryColor,
+                    onClick: () {
+                      if (selectboxViewModel.selectedButtonIndex != -1) {
+                        selectboxViewModel.clearSelection();
+                      } else {
+                        selectboxViewModel.selectButton(0);
+                      }
+                      Navigator.pushNamed(context, Routes.dashboard);
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

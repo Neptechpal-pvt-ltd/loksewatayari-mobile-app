@@ -46,7 +46,7 @@ class DashboardViewModel extends ChangeNotifier {
           pages[index],
           Text(
             bottontext[index],
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           )
         ],
       ),

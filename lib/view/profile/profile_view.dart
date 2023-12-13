@@ -4,6 +4,7 @@ import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatelessWidget {
   List<String> profileAccount = [
@@ -32,21 +33,21 @@ class ProfileView extends StatelessWidget {
         body: ListView(children: [
           Column(
             children: [
-              CustomAppbar(
+              const CustomAppbar(
                 text: "Profile",
               ),
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage(AssetsPath.profile),
               ),
-              Text(
+              const Text(
                 "Bryan Adam",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                     color: Color(0xff151B28)),
               ),
-              Text(
+              const Text(
                 "bryan.adam87@gmail.com",
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -106,8 +107,8 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -121,8 +122,9 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
               Container(
-                height: MediaQuery.sizeOf(context).height * 0.45,
+                height: MediaQuery.sizeOf(context).height * 0.35,
                 child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: profileAccount.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -147,28 +149,33 @@ class ProfileView extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(15.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
                                         child: SvgPicture.asset(
                                             AssetsPath().profileAccount[index]),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
                                       Text(profileAccount[index]),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
                                     child:
                                         Icon(Icons.arrow_forward_ios_outlined),
                                   )
                                 ],
                               ),
+                              const Divider()
                             ],
                           ),
                         ),
                       );
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -182,34 +189,56 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
               Container(
-                height: MediaQuery.sizeOf(context).height * 0.85,
+                height: MediaQuery.sizeOf(context).height * 0.70,
                 child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: SvgPicture.asset(
-                                          AssetsPath().profileGeneral[index]),
+                      return GestureDetector(
+                        onTap: () async {
+                          switch (index) {
+                            case 7:
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              final bool isLoggedIn =
+                                  prefs.getBool('isLoggedIn') ?? false;
+                              Navigator.pushNamed(context, Routes.logIn);
+                          }
+                        },
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: SvgPicture.asset(
+                                            AssetsPath().profileGeneral[index]),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(profileGeneral[index]),
+                                    ],
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      size: 4,
                                     ),
-                                    Text(profileGeneral[index]),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(Icons.arrow_forward_ios_outlined),
-                                )
-                              ],
-                            ),
-                          ],
+                                  )
+                                ],
+                              ),
+                              const Divider()
+                            ],
+                          ),
                         ),
                       );
                     }),

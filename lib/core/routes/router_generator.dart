@@ -7,11 +7,13 @@ import 'package:loksewa/view/login/login_view.dart';
 import 'package:loksewa/view/login/select_career.dart';
 import 'package:loksewa/view/login/select_course.dart';
 import 'package:loksewa/view/profile/edit_account.dart';
+import 'package:loksewa/view/profile/loksewavideo.dart';
 import 'package:loksewa/view/profile/prepare_loksewa.dart';
 import 'package:loksewa/view/profile/trackprogress.dart';
 import 'package:loksewa/view/quiz/qsnpart.dart';
 import 'package:loksewa/view/quiz/result.dart';
 import 'package:loksewa/view/resources/resource_view.dart';
+import 'package:loksewa/view/signup/signup_view.dart';
 import 'package:loksewa/view/splash_onboard/onboard_Screen.dart';
 import 'package:loksewa/view/splash_onboard/splash_screen.dart';
 
@@ -19,13 +21,16 @@ class RouterGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
+        return MaterialPageRoute(builder: (_) =>  SplashScreen());
 
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
 
       case Routes.logIn:
         return MaterialPageRoute(builder: (_) => const LogInView());
+        
+      case Routes.signUp:
+        return MaterialPageRoute(builder: (_) => const SignUpView());
 
       case Routes.career:
         return MaterialPageRoute(builder: (_) => SelectCareer());
@@ -44,13 +49,15 @@ class RouterGenerator {
       case Routes.askqsn:
         return MaterialPageRoute(builder: (_) => const AskQsn());
       case Routes.resourceView:
-        return MaterialPageRoute(builder: (_) =>  ResourcesView());
+        return MaterialPageRoute(builder: (_) =>  const ResourcesView());
             case Routes.editAccount:
-        return MaterialPageRoute(builder: (_) =>  EditAccount());
+        return MaterialPageRoute(builder: (_) =>  const EditAccount());
                     case Routes.trackProgress:
         return MaterialPageRoute(builder: (_) => TrackMyProgress() );
           case Routes.prepareloksewa:
         return MaterialPageRoute(builder: (_) => PrepareLoksewa() );
+          case Routes.loksewavideo:
+        return MaterialPageRoute(builder: (_) => const LOksewaVideo());
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
     }

@@ -47,6 +47,7 @@ class TopicSelection extends StatelessWidget {
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.35,
             child: ListView.builder(
+              // physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: notesTitle.length,
               itemBuilder: (context, index) {

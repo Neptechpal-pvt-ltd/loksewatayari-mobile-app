@@ -3,6 +3,8 @@ class Routes {
   static const String onboarding = "/OnboardingView";
   static const String splash = "/SplashScreen";
   static const String logIn = "/LogInView";
+  static const String signUp = "/SignUpView";
+
   static const String career = "/SelectCareer";
 
   static const String course = "/SelectCourse";
@@ -12,6 +14,8 @@ class Routes {
   static const String askqsn = "/AskQuestion";
   static const String resourceView = "/ResourceView";
   static const String editAccount = "/EditAccount";
+  static const String loksewavideo = "/LoksewaVideo";
+
 
 
 

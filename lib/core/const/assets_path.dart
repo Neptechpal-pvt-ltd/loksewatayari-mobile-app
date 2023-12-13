@@ -60,6 +60,10 @@ class AssetsPath {
   static const String resource = '${_imagePath}resource.png';
   static const String courseeg = '${_imagePath}courseeg.png';
 
+//video page
+  static const String loksewavideo = '${_imagePath}introtoloksewa.png';
+
+
   
   // profileIcon for Account
    List<String> profileAccount = [
@@ -79,5 +83,8 @@ class AssetsPath {
     '${_iconPath}shareapp.svg',
     '${_iconPath}logout.svg',
   ];
+//loksewa logo new
+  static const String loksewanewlogo = '${_imagePath}loksewa.jpg';
+
 
 }

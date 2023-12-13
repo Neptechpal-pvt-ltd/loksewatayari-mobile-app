@@ -94,13 +94,13 @@ class CommunityView extends StatelessWidget {
                 color: AppColor.primaryTextColor,
                 child: Column(
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         CircleAvatar(
                           backgroundImage: AssetImage(AssetsPath.vishnu),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -123,16 +123,16 @@ class CommunityView extends StatelessWidget {
                         )
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "Can anyone send me the history of world from book?",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "WAP to accept a number. Check if it is a 4-digit number or not . If it is a 4-digit number then extract all the digits using for loop . display all the digits . pls right answer only .​",
                         style: TextStyle(
@@ -141,8 +141,8 @@ class CommunityView extends StatelessWidget {
                             color: Color(0xff384255)),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
                       child: Divider(
                         color: AppColor.borderColor,
                       ),
@@ -150,30 +150,30 @@ class CommunityView extends StatelessWidget {
                     Row(
                       children: [
                         SvgPicture.asset(AssetsPath.like),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Like(0)",
                             style: TextStyle(color: Color(0xff49556D)),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SvgPicture.asset(AssetsPath.comment),
                         ),
-                        Text("Comment(0)",
+                        const Text("Comment(0)",
                             style: TextStyle(color: Color(0xff49556D))),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SvgPicture.asset(AssetsPath.share),
                         ),
-                        Text("Share",
+                        const Text("Share",
                             style: TextStyle(color: Color(0xff49556D))),
                       ],
                     )
@@ -189,13 +189,13 @@ class CommunityView extends StatelessWidget {
                 color: AppColor.primaryTextColor,
                 child: Column(
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         CircleAvatar(
                           backgroundImage: AssetImage(AssetsPath.vishnu),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -222,16 +222,16 @@ class CommunityView extends StatelessWidget {
                       AssetsPath.askqsn,
                       fit: BoxFit.cover,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "Can anyone send me the history of world from book?",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "WAP to accept a number. Check if it is a 4-digit number or not . If it is a 4-digit number then extract all the digits using for loop . display all the digits . pls right answer only .​",
                         style: TextStyle(
@@ -240,8 +240,8 @@ class CommunityView extends StatelessWidget {
                             color: Color(0xff384255)),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
                       child: Divider(
                         color: AppColor.borderColor,
                       ),
@@ -249,30 +249,30 @@ class CommunityView extends StatelessWidget {
                     Row(
                       children: [
                         SvgPicture.asset(AssetsPath.like),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Like(0)",
                             style: TextStyle(color: Color(0xff49556D)),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SvgPicture.asset(AssetsPath.comment),
                         ),
-                        Text("Comment(0)",
+                        const Text("Comment(0)",
                             style: TextStyle(color: Color(0xff49556D))),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SvgPicture.asset(AssetsPath.share),
                         ),
-                        Text("Share",
+                        const Text("Share",
                             style: TextStyle(color: Color(0xff49556D))),
                       ],
                     )
