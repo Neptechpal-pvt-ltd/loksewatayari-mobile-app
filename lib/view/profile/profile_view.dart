@@ -124,6 +124,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.35,
                 child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: profileAccount.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -190,6 +191,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.70,
                 child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -227,8 +229,10 @@ class ProfileView extends StatelessWidget {
                                   ),
                                   const Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child:
-                                        Icon(Icons.arrow_forward_ios_outlined),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      size: 4,
+                                    ),
                                   )
                                 ],
                               ),
