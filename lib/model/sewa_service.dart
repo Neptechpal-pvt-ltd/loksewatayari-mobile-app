@@ -2,12 +2,12 @@
 
 import 'dart:convert';
 
-List<Selectcareers> selececareersFromJson(String str) {
+List<Selectcareers> selectcareersFromJson(String str) {
     final jsonData = json.decode(str);
     return new List<Selectcareers>.from(jsonData.map((x) => Selectcareers.fromJson(x)));
 }
 
-String selececareersToJson(List<Selectcareers> data) {
+String selectcareersToJson(List<Selectcareers> data) {
     final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
     return json.encode(dyn);
 }

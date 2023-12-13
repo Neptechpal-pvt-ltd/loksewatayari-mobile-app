@@ -82,6 +82,46 @@ class AuthProvider extends ChangeNotifier {
       throw e;
     }
   }
+
+
+  Dio _dio = Dio();
+
+  Future<void> register(String username, String fullName,String email,String password) async {
+    try {
+      final Map<String, dynamic> requestData = {
+        'username': username,
+        'fullname': fullName,
+        'email':email,
+        'password': password,
+        // Add other registration data as needed
+      };
+
+      Response response = await _dio.post(
+        'http://loksewa.cb-ashik.me/auth/register',
+        data: requestData,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.data);
+        // Handle successful registration
+      } else {
+        throw DioError(
+          requestOptions: RequestOptions(path: ''),
+          response: response,
+        );
+      }
+    } on DioError catch (e) {
+      // Handle DioError
+      throw e;
+    }
+  }
 }
+
+
 
 

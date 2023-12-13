@@ -10,7 +10,7 @@ import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({super.key});
+  const SignUpView({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +26,34 @@ class SignUpView extends StatelessWidget {
                   AssetsPath.loksewanewlogo,
                   height: MediaQuery.sizeOf(context).height * 0.15,
                 ),
+                // Use TextFormFields to get user input
                 TextButtonField(
-                  controller: context.read<AuthProvider>().fullnameController,
+                  controller: authProvider.fullnameController,
                   labeltext: "Full Name",
                 ),
                 TextButtonField(
-                  controller: context.read<AuthProvider>().usernameController,
+                  controller: authProvider.usernameController,
                   labeltext: "UserName",
                 ),
                 TextButtonField(
-                  controller: context.read<AuthProvider>().emailController,
+                  controller: authProvider.emailController,
                   labeltext: "Email Address",
                 ),
                 TextButtonField(
-                  controller: context.read<AuthProvider>().passwordController,
-                  labeltext: "password",
+                  controller: authProvider.passwordController,
+                  labeltext: "Password",
+                  // obscureText: true, // Assuming it's a password field
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () async {
-                      await authProvider.authenticateUser();
+                      // Call the registration method from AuthProvider
+                      await authProvider.register(authProvider.usernameController.text, authProvider.emailController.text,
+                                 authProvider.passwordController.text,authProvider.passwordController.text
+ );
+
+                      // Check if registration is successful
                       if (authProvider.isAuthenticated) {
                         Navigator.pushNamed(context, Routes.logIn);
                       }

@@ -29,7 +29,7 @@ class SelectboxViewModel extends ChangeNotifier {
         jsonData = List<Map<String, dynamic>>.from(response.data);
         notifyListeners();
       } else {
-        print(response.statusCode);
+        print('failed to fetch data:${response.statusCode}');
       }
     } catch (e) {
       print(e);
@@ -37,18 +37,4 @@ class SelectboxViewModel extends ChangeNotifier {
   }
 }
 
-// class SelectCareerViewmodel extends ChangeNotifier {
 
-//   void getData() async {
-//     try {
-//       var response = await Dio().get("https://loksewa.cb-ashik.me/sewaservice");
-//       if (response.statusCode == 200) {
-        
-//       } else {
-//         print(response.statusCode);
-//       }
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
-// }

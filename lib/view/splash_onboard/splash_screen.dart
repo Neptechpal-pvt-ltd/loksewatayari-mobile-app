@@ -6,7 +6,6 @@ import 'package:loksewa/core/themes/app_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
-
   SplashScreen({super.key});
 
   @override
@@ -35,13 +34,21 @@ class SplashScreen extends StatelessWidget {
                     ],
                   )),
               GestureDetector(
-                  onTap: () async{
-                     SharedPreferences prefs = await SharedPreferences.getInstance();
-                       final bool isLoggedIn = prefs.getBool('isLoggedIn')! ;
-                        isLoggedIn
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
 
-                        ? Navigator.pushNamed(context, Routes.career)
-                        : Navigator.pushNamed(context, Routes.onboarding);
+                    if (isLoggedIn != null) {
+                      // Your existing logic for navigation here
+                      isLoggedIn
+                          ? Navigator.pushNamed(context, Routes.career)
+                          : Navigator.pushNamed(context, Routes.onboarding);
+                    } else {
+                      // Handle the case where the value is null
+                      // You might want to handle this differently based on your application logic
+                      print('The value of isLoggedIn is null');
+                    }
                   },
                   child: const CircularProgressIndicator(
                     color: AppColor.primaryColor,

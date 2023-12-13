@@ -14,16 +14,7 @@ class SelectCareer extends StatelessWidget {
     selectedButtonIndex = index;
   }
 
-  var jsonData;
-  
-  // final List<Map> texts = [
-  //   {'title': "+2", 'isSelected': false},
-  //   {'title': "Bachelor", 'isSelected': false},
-  //   {'title': "Bachelor", 'isSelected': false},
-  //   {'title': "Bachelor", 'isSelected': false},
-  //   {'title': "Bachelor", 'isSelected': false},
-  //   {'title': "Bachelor", 'isSelected': false},
-  // ];
+  var jsonData = [];
 
   SelectCareer({Key? key}) : super(key: key);
 
@@ -70,45 +61,50 @@ class SelectCareer extends StatelessWidget {
                   ],
                 )),
             Expanded(
-              flex: 8,
-              child: jsonData!=null?
-              GridView.count(
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: List.generate(jsonData.length, (index) {
-                  final isSelected =
-                      index == selectboxViewModel.selectedButtonIndex;
-                  return InkWell(
-                    onTap: () {
-                      selectboxViewModel.selectButton(index);
-                    },
-                    child: Container(
-                      height: 100,
-                      width: 171,
-                      decoration: BoxDecoration(
-                          color: isSelected ? AppColor.primaryColor : null,
-                          // color: texts[index]['isSelected']
-                          //     ? AppColor.primaryColor
-                          //     : Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColor.borderColor)),
-                      margin: const EdgeInsets.all(8),
-                      child: Center(
-                        child: Text(
-                          jsonData[index]['title'],
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: isSelected
-                                  ? AppColor.borderColor
-                                  : Colors.black),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-              ):Center(child: CircularProgressIndicator())
-            ),
+                flex: 8,
+                child: jsonData != null
+                    ? GridView.count(
+                        crossAxisCount: 3,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: List.generate(jsonData.length, (index) {
+                          print(
+                            jsonData[index]['title'],
+                          );
+                          final isSelected =
+                              index == selectboxViewModel.selectedButtonIndex;
+                          return InkWell(
+                            onTap: () {
+                              selectboxViewModel.selectButton(index);
+                            },
+                            child: Container(
+                              height: 100,
+                              width: 171,
+                              decoration: BoxDecoration(
+                                  color:
+                                      isSelected ? AppColor.primaryColor : null,
+                                  // color: texts[index]['isSelected']
+                                  //     ? AppColor.primaryColor
+                                  //     : Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                      Border.all(color: AppColor.borderColor)),
+                              margin: const EdgeInsets.all(8),
+                              child: Center(
+                                child: Text(
+                                  jsonData[index]['title'],
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: isSelected
+                                          ? AppColor.borderColor
+                                          : Colors.black),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      )
+                    : Center(child: CircularProgressIndicator())),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, Routes.course);
