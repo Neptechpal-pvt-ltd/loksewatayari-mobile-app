@@ -19,7 +19,7 @@ class Selectcareers {
     String? image;
     String? createdAt;
     String? updatedAt;
-    List<SubService> subServices;
+    List<SubService>? subServices;
     Forum? forum;
 
     Selectcareers({
@@ -29,8 +29,8 @@ class Selectcareers {
         this.image,
         this.createdAt,
         this.updatedAt,
-      required  this.subServices,
-       required this.forum,
+        this.subServices,
+        this.forum,
     });
 
     factory Selectcareers.fromJson(Map<String, dynamic> json) => new Selectcareers(
@@ -51,7 +51,7 @@ class Selectcareers {
         "image": image == null ? null : image,
         "created_at": createdAt,
         "updated_at": updatedAt,
-        "subServices":  List<dynamic>.from(subServices.map((x) => x.toJson())),
+        "subServices":  List<dynamic>.from(subServices!.map((x) => x.toJson())),
         "forum": forum == null ? null : forum!.toJson(),
     };
 }

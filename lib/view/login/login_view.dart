@@ -9,8 +9,16 @@ import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
 import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LogInView extends StatelessWidget {
-  const LogInView({Key? key});
+class LogInView extends StatefulWidget {
+  LogInView({Key? key});
+
+  @override
+  _LogInViewState createState() => _LogInViewState();
+}
+
+class _LogInViewState extends State<LogInView> {
+  final _formKey = GlobalKey<FormState>();
+  // bool _isPasswordVisible = false; // Track password visibility
 
   @override
   Widget build(BuildContext context) {
@@ -54,90 +62,124 @@ class LogInView extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 8,
-                  child: Column(
-                    children: [
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Email",
-                              style: TextStyle(
-                                color: AppColor.credentialName,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "UserName",
+                                style: TextStyle(
+                                  color: AppColor.credentialName,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          cursorColor: AppColor.primaryColor,
-                          controller:
-                              authProvider.usernameController, // Changed here
-                          decoration: InputDecoration(
-                            hintText: "Enter Your Email Address",
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 242, 243, 250),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            cursorColor: AppColor.primaryColor,
+                            controller: authProvider.usernameController,
+                            decoration: InputDecoration(
+                              hintText: "Enter Your Username",
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color.fromARGB(255, 242, 243, 250),
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Username is required';
+                              }
+                              return null; // No error if the value is not empty
+                            },
+                          ),
+                        ),
+                        const Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Password",
+                                style: TextStyle(
+                                  color: AppColor.credentialName,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            cursorColor: AppColor.primaryColor,
+                            controller: authProvider.passwordController,
+                            // obscureText: !_isPasswordVisible,
+                            decoration: InputDecoration(
+                              hintText: "Enter Your Password",
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: AppColor.primaryTextColor,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              // suffixIcon: IconButton(
+                              //   icon: Icon(
+                              //     _isPasswordVisible
+                              //         ? Icons.visibility
+                              //         : Icons.visibility_off,
+                              //     color: AppColor.primaryTextColor,
+                              //   ),
+                              //   onPressed: () {
+                              //     setState(() {
+                              //       _isPasswordVisible = !_isPasswordVisible;
+                              //     });
+                              //   },
+                              // ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Password is required';
+                              }
+                              return null; // No error if the value is not empty
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () async {
+                              if (_formKey.currentState?.validate() ?? true) {
+                                await authProvider.authenticateUser();
+                                if (authProvider.isAuthenticated) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('You are logged in'),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                  Navigator.pushNamed(context, Routes.career);
+                                }
+                              }
+                            },
+                            child: const NavButton(
+                              btnText: "LogIn",
+                              color: AppColor.primaryColor,
+                              textColor: AppColor.primaryTextColor,
                             ),
                           ),
                         ),
-                      ),
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Password",
-                              style: TextStyle(
-                                color: AppColor.credentialName,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          cursorColor: AppColor.primaryColor,
-                          controller:
-                              authProvider.passwordController, // Changed here
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            hintText: "Enter Your Password",
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: AppColor.primaryTextColor,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () async {
-                            await authProvider.authenticateUser();
-                            if (authProvider.isAuthenticated) {
-                              Navigator.pushNamed(context, Routes.career);
-                            }
-                          },
-                          child: const NavButton(
-                            btnText: "LogIn",
-                            color: AppColor.primaryColor,
-                            textColor: AppColor.primaryTextColor,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const Text("or logIn With"),
@@ -188,7 +230,7 @@ class LogInView extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: 'Sign In',
+                        text: 'Sign Up',
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                           color: AppColor.primaryColor,

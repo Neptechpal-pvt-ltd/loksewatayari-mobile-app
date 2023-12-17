@@ -31,7 +31,7 @@ class SelectCourse extends StatelessWidget {
 
     bool isContinueButtonPurple = selectboxViewModel.selectedButtonIndex != -1;
 
-    return Consumer<SelectedViewModel>(
+    return Consumer<SelectboxViewModel>(
       builder: (context, selectedViewModel, child) {
         return SafeArea(
           child: Scaffold(

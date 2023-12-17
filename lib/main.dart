@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:loksewa/core/routes/router_generator.dart';
 import 'package:loksewa/core/themes/app_theme.dart';
-import 'package:loksewa/view/home_view/dashboard.dart';
 import 'package:loksewa/view/login/login_view.dart';
-import 'package:loksewa/view/splash_onboard/splash_screen.dart';
 import 'package:loksewa/view_model.dart/dashboard_view_model.dart';
 import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:loksewa/view_model.dart/onboarding_view_model.dart';
-import 'package:loksewa/view_model.dart/select_view_model.dart';
 import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
 import 'package:loksewa/view_model.dart/selectcoursemodel.dart';
 import 'package:loksewa/view_model.dart/theme_view_model.dart';
@@ -32,8 +29,6 @@ class MyApp extends StatelessWidget {
             create: (_) => OnboardViewModel()),
         ChangeNotifierProvider<CourseSelectionModel>(
             create: (_) => CourseSelectionModel()),
-        ChangeNotifierProvider<SelectedViewModel>(
-            create: (_) => SelectedViewModel()),
         ChangeNotifierProvider<SelectboxViewModel>(
             create: (_) => SelectboxViewModel()),
         ChangeNotifierProvider<DashboardViewModel>(
@@ -46,7 +41,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: DashboardPage()),
+          home: LogInView()),
     );
   }
 }

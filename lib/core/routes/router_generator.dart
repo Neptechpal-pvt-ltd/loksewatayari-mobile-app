@@ -27,10 +27,10 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
 
       case Routes.logIn:
-        return MaterialPageRoute(builder: (_) => const LogInView());
+        return MaterialPageRoute(builder: (_) =>  LogInView());
         
       case Routes.signUp:
-        return MaterialPageRoute(builder: (_) => const SignUpView());
+        return MaterialPageRoute(builder: (_) =>  SignUpView());
 
       case Routes.career:
         return MaterialPageRoute(builder: (_) => SelectCareer());
