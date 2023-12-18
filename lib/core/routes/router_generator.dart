@@ -13,6 +13,7 @@ import 'package:loksewa/view/profile/trackprogress.dart';
 import 'package:loksewa/view/quiz/qsnpart.dart';
 import 'package:loksewa/view/quiz/result.dart';
 import 'package:loksewa/view/resources/resource_view.dart';
+import 'package:loksewa/view/signup/register_view.dart';
 import 'package:loksewa/view/signup/signup_view.dart';
 import 'package:loksewa/view/splash_onboard/onboard_Screen.dart';
 import 'package:loksewa/view/splash_onboard/splash_screen.dart';

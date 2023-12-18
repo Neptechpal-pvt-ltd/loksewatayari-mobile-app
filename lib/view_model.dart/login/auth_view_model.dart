@@ -9,16 +9,22 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController middlenameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-
+// final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  List<GlobalKey<FormState>> formKeys = [
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+  ];
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
 
   Future<void> authenticateUser() async {
     await Future.delayed(Duration(seconds: 2));
-    _isAuthenticated = true;
-    notifyListeners();
 
     final String username = usernameController.text;
     final String password = passwordController.text;
@@ -65,7 +71,6 @@ class AuthProvider extends ChangeNotifier {
         'http://loksewa.cb-ashik.me/auth/login',
         data: requestData,
         options: Options(
-          
           headers: {
             'Content-Type': 'application/json',
           },
@@ -84,23 +89,22 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
- 
   Dio _dio = Dio();
 
-  Future<void> register(
-  UsersData userDetail
-    // String firstname,
-    // String middlename,
-    // String lastname,
-    // String username,
-    // String email,
-    // String password,
-  ) async {
+  Future<void> register(UsersData userDetail
+      // String firstname,
+      // String middlename,
+      // String lastname,
+      // String username,
+      // String email,
+      // String password,
+      ) async {
     try {
       final Map<String, dynamic> requestData = userDetail.toJson();
 
+      print('request data:$requestData');
       Response response = await _dio.post(
-        'https://loksewa.cb-ashik.me/auth/register',
+        'http://loksewa.cb-ashik.me/auth/register',
         data: requestData,
         options: Options(
           headers: {
@@ -110,6 +114,7 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        print('df:${response.data}');
         print('Registration successful: ${response.data}');
         _isAuthenticated = true;
         notifyListeners();
@@ -128,5 +133,4 @@ class AuthProvider extends ChangeNotifier {
       throw e;
     }
   }
-
 }

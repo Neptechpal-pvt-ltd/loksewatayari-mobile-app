@@ -16,4 +16,5 @@ class CourseSelectionModel extends ChangeNotifier {
     _completedCoursesColor = value ? Colors.black : AppColor.primaryColor;
     notifyListeners();
   }
+  
 }
