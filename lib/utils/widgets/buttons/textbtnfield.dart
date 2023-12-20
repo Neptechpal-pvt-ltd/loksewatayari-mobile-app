@@ -41,28 +41,38 @@ class _TextButtonFieldState extends State<TextButtonField> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:
+              const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 10),
           child: Row(
             children: [
-              Text(
-                widget.labeltext ??
-                    'Default Label' + (widget.isRequired ? '*' : ''),
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: widget.controller.text.isNotEmpty
-                      ? Colors.black
-                      : (widget.isRequired ? Colors.red : Colors.black),
+              Text.rich(
+                TextSpan(
+                  text: (widget.labeltext ?? 'Default Label'),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: widget.controller.text.isNotEmpty
+                        ? Colors.black
+                        : Colors.black,
+                  ),
+                  children: [
+                    if (widget.isRequired && widget.controller.text.isEmpty)
+                      TextSpan(
+                        text: '*',
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 8, right: 8),
+          padding: EdgeInsets.only(left: 15, right: 15),
           child: TextFormField(
             focusNode: focusNode,
             obscureText: widget.obscureText == true && !widget.showText,
-            // obscureText: widget.obscureText ?? !isPasswordVisible,
             cursorColor: AppColor.primaryColor,
             controller: widget.controller,
             decoration: InputDecoration(
@@ -70,7 +80,7 @@ class _TextButtonFieldState extends State<TextButtonField> {
                 borderSide: BorderSide(
                   color: widget.controller.text.isNotEmpty
                       ? Colors.black
-                      : (widget.isRequired ? Colors.red : Colors.black),
+                      : Colors.black, // Use black for other text
                 ),
               ),
               focusedBorder: OutlineInputBorder(
@@ -98,14 +108,15 @@ class _TextButtonFieldState extends State<TextButtonField> {
               if (widget.isRequired && (value == null || value.isEmpty)) {
                 return 'This field is required';
               }
-              if (widget.labeltext == 'Email Address' && !isValidEmail(value)) {
+                 if (widget.labeltext == 'Email Address' && !isValidEmail(value)) {
                 return 'Enter a valid email address';
               }
               if (widget.labeltext == 'Password' && !isValidPassword(value)) {
                 return 'Password must be at least 8 characters long and contain 1 special character';
               }
-              return null; // Return null if there are no validation issues
+              return null; 
             },
+
           ),
         ),
         SizedBox(

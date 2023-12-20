@@ -20,7 +20,7 @@ class SignUpView extends StatelessWidget {
       builder: (context, authProvider, child) {
         return SafeArea(
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true,
             body: SingleChildScrollView(
               child: Form(
                 key: authProvider.formKeys[0],
@@ -28,8 +28,8 @@ class SignUpView extends StatelessWidget {
                   children: [
                     CustomAppbar(),
                     Image.asset(
-                      AssetsPath.loksewanewlogo,
-                      height: MediaQuery.of(context).size.height * 0.15,
+                      AssetsPath.transparentlogo,
+                      height: MediaQuery.of(context).size.height * 0.19,
                     ),
                     // Use TextButtonField for each input field
                     TextButtonField(

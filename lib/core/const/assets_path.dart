@@ -85,6 +85,12 @@ class AssetsPath {
   ];
 //loksewa logo new
   static const String loksewanewlogo = '${_imagePath}loksewa.jpg';
+//lock
+  static const String lock = '${_iconPath}lock.png';
+
+  //transparent logo
+  static const String transparentlogo = '${_imagePath}loksewalogotransparent.png';
+
 
 
 }

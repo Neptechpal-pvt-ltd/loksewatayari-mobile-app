@@ -91,14 +91,7 @@ class AuthProvider extends ChangeNotifier {
 
   Dio _dio = Dio();
 
-  Future<void> register(UsersData userDetail
-      // String firstname,
-      // String middlename,
-      // String lastname,
-      // String username,
-      // String email,
-      // String password,
-      ) async {
+  Future<void> register(UsersData userDetail) async {
     try {
       final Map<String, dynamic> requestData = userDetail.toJson();
 

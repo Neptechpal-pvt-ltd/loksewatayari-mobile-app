@@ -42,6 +42,7 @@ dependencies:
   dio: ^5.4.0
   get_storage: ^2.1.1
   shared_preferences: ^2.2.2
+  pin_input_text_field: ^4.5.1
 
 dev_dependencies:
   flutter_test:
