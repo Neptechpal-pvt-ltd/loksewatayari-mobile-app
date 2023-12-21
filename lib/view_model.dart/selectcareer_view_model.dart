@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:loksewa/model/select_careers_modal.dart';
 
 class SelectboxViewModel extends ChangeNotifier {
   final TextEditingController _selectCareer = TextEditingController();
@@ -20,21 +21,54 @@ class SelectboxViewModel extends ChangeNotifier {
     selectedButtonIndex = -1;
     notifyListeners();
   }
-    List<Map<String, dynamic>>? jsonData;
 
-  void getData() async {
+  int _index = 0;
+  int get getindex => _index;
+
+  void setIndex(int newIndex) {
+    _index = newIndex;
+  }
+
+
+  Dio _dio = Dio();
+
+  Future<List<Selectcareers>> getData() async {
     try {
-      var response = await Dio().get("https://loksewa.cb-ashik.me/sewaservice");
-      if (response.statusCode == 200) {
-        jsonData = List<Map<String, dynamic>>.from(response.data);
-        notifyListeners();
+      // Make the API request
+      Response response = await _dio.get(
+        'https://loksewa.cb-ashik.me/sewaservice',
+      );
+
+      // Check if the response status is successful
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.data);
+        // Map the JSON data to your model
+        List<Selectcareers> careers = (response.data as List<dynamic>)
+            .map((item) => Selectcareers.fromJson(item))
+            .toList();
+
+        // Do something with the mapped data, or notify listeners
+        print('Data are displayed: $careers');
+
+        // Return the list of Selectcareers
+        return careers;
       } else {
-        print('failed to fetch data:${response.statusCode}');
+        // Handle other response status codes
+        print(
+            'Failed to fetch data: Status Code: ${response.statusCode}, Response: ${response.data}');
+        throw DioError(
+          requestOptions: RequestOptions(path: ''),
+          response: response,
+        );
       }
     } catch (e) {
-      print(e);
+      // Handle Dio errors or other exceptions
+      print('Error during API request: $e');
+      if (e is DioError) {
+        print('DioError: ${e.response?.statusMessage}');
+      }
+      // If an error occurs, you can choose to return an empty list or throw an exception
+      return [];
     }
   }
 }
-
-

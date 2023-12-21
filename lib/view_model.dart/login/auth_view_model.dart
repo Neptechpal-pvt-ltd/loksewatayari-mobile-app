@@ -1,20 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:loksewa/model/register_modal.dart';
 import 'package:loksewa/model/responsemodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
-  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController middlenameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+// final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  List<GlobalKey<FormState>> formKeys = [
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+  ];
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
 
   Future<void> authenticateUser() async {
     await Future.delayed(Duration(seconds: 2));
-    _isAuthenticated = true;
-    notifyListeners();
 
     final String username = usernameController.text;
     final String password = passwordController.text;
@@ -28,20 +38,17 @@ class AuthProvider extends ChangeNotifier {
       Token loggedInUser = await postLogin(username, password);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
-   
-       _isAuthenticated = true;
-    notifyListeners();
+
+      _isAuthenticated = true;
+      notifyListeners();
       prefs.setString('accessToken', loggedInUser.accessToken!);
       prefs.setString('refreshToken', loggedInUser.refreshToken!);
 
-  
       final String? accessToken = prefs.getString('accessToken');
       final String? refreshToken = prefs.getString('refreshToken');
 
       print(accessToken);
       print(refreshToken);
-
-
     } on DioException catch (e) {
       print('Dio exception occurred during authentication: $e');
       if (e.response != null) {
@@ -78,24 +85,17 @@ class AuthProvider extends ChangeNotifier {
             requestOptions: RequestOptions(path: ''), response: response);
       }
     } on DioException catch (e) {
-      // Handle DioException
       throw e;
     }
   }
 
-
   Dio _dio = Dio();
 
-  Future<void> register(String username, String fullName,String email,String password) async {
+  Future<void> register(UsersData userDetail) async {
     try {
-      final Map<String, dynamic> requestData = {
-        'username': username,
-        'fullname': fullName,
-        'email':email,
-        'password': password,
-        // Add other registration data as needed
-      };
+      final Map<String, dynamic> requestData = userDetail.toJson();
 
+      print('request data:$requestData');
       Response response = await _dio.post(
         'http://loksewa.cb-ashik.me/auth/register',
         data: requestData,
@@ -107,21 +107,23 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(response.data);
-        // Handle successful registration
+        print('df:${response.data}');
+        print('Registration successful: ${response.data}');
+        _isAuthenticated = true;
+        notifyListeners();
       } else {
+        print('Registration failed. Response: ${response.data}');
         throw DioError(
           requestOptions: RequestOptions(path: ''),
           response: response,
         );
       }
-    } on DioError catch (e) {
-      // Handle DioError
+    } catch (e) {
+      print('Dio exception occurred during registration: $e');
+      if (e is DioError) {
+        print('DioError: ${e.response!.statusMessage}');
+      }
       throw e;
     }
   }
 }
-
-
-
-

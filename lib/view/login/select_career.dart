@@ -3,34 +3,23 @@ import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
+import 'package:loksewa/model/select_careers_modal.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
 import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
 import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SelectCareer extends StatelessWidget {
-  int selectedButtonIndex = -1;
-  void selectButton(int index) {
-    selectedButtonIndex = index;
-  }
-
-  var jsonData = [];
-
-  SelectCareer({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    Provider.of<SelectboxViewModel>(context, listen: false).getData();
-    final selectboxViewModel = Provider.of<SelectboxViewModel>(context);
-
-    bool isContinueButtonPurple = selectboxViewModel.selectedButtonIndex != -1;
-
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            const CustomAppbar(),
-            const Expanded(
+    return Consumer<SelectboxViewModel>(
+        builder: (context, selectboxviewmodel, child) {
+      return SafeArea(
+        child: Scaffold(
+          body: Column(
+            children: [
+              const CustomAppbar(),
+              const Expanded(
                 flex: 6,
                 child: Column(
                   children: [
@@ -59,77 +48,103 @@ class SelectCareer extends StatelessWidget {
                       ),
                     ),
                   ],
-                )),
-            Expanded(
+                ),
+              ),
+              Expanded(
                 flex: 8,
-                child: jsonData != null
-                    ? GridView.count(
-                        crossAxisCount: 3,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: List.generate(jsonData.length, (index) {
-                          print(
-                            jsonData[index]['title'],
-                          );
-                          final isSelected =
-                              index == selectboxViewModel.selectedButtonIndex;
-                          return InkWell(
-                            onTap: () {
-                              selectboxViewModel.selectButton(index);
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 171,
-                              decoration: BoxDecoration(
-                                  color:
-                                      isSelected ? AppColor.primaryColor : null,
-                                  // color: texts[index]['isSelected']
-                                  //     ? AppColor.primaryColor
-                                  //     : Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border:
-                                      Border.all(color: AppColor.borderColor)),
-                              margin: const EdgeInsets.all(8),
-                              child: Center(
-                                child: Text(
-                                  jsonData[index]['title'],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: isSelected
-                                          ? AppColor.borderColor
-                                          : Colors.black),
+                child: Consumer<SelectboxViewModel>(
+                  builder: (context, selectboxViewModel, _) {
+                    return FutureBuilder<List<Selectcareers>>(
+                      future: selectboxViewModel.getData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        } else {
+                          List<Selectcareers> careers = snapshot.data ?? [];
+                          print(careers[0].title);
+                          return GridView.count(
+                            crossAxisCount: 3,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: List.generate(careers.length, (index) {
+                              final isSelected = index ==
+                                  selectboxViewModel.selectedButtonIndex;
+                              return InkWell(
+                                onTap: () {
+                                  selectboxViewModel.selectButton(index);
+                                  selectboxViewModel.setIndex(index);
+                                  // print(careers[index].title);
+                                },
+                                child: Container(
+                                  height: 100,
+                                  width: 171,
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? AppColor.primaryColor
+                                        : null,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border:
+                                        Border.all(color: AppColor.borderColor),
+                                  ),
+                                  margin: const EdgeInsets.all(8),
+                                  child: Center(
+                                    child: Text(
+                                      careers[index].title!,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: isSelected
+                                            ? AppColor.borderColor
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            }),
                           );
-                        }),
-                      )
-                    : Center(child: CircularProgressIndicator())),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.course);
-              },
-              child: NavButton(
-                btnText: "Continue",
-                color: isContinueButtonPurple
-                    ? AppColor.primaryColor
-                    : AppColor.borderColor,
-                textColor: isContinueButtonPurple
-                    ? AppColor.borderColor
-                    : AppColor.primaryColor,
-                onClick: () {
-                  if (selectboxViewModel.selectedButtonIndex != -1) {
-                    selectboxViewModel.clearSelection();
-                  } else {
-                    selectboxViewModel.selectButton(0);
-                  }
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
                   Navigator.pushNamed(context, Routes.course);
                 },
+                child: Consumer<SelectboxViewModel>(
+                  builder: (context, selectboxViewModel, _) {
+                    final isContinueButtonPurple =
+                        selectboxViewModel.selectedButtonIndex != -1;
+
+                    return NavButton(
+                      btnText: "Continue",
+                      color: isContinueButtonPurple
+                          ? AppColor.primaryColor
+                          : AppColor.borderColor,
+                      textColor: isContinueButtonPurple
+                          ? AppColor.borderColor
+                          : AppColor.primaryColor,
+                      onClick: () {
+                        if (selectboxViewModel.selectedButtonIndex != -1) {
+                          selectboxViewModel.clearSelection();
+                        } else {
+                          selectboxViewModel.selectButton(0);
+                        }
+                        Navigator.pushNamed(context, Routes.course);
+                      },
+                    );
+                  },
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
