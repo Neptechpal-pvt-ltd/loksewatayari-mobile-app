@@ -16,8 +16,8 @@ class OtpTextField extends StatelessWidget {
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         maxLength: 1,
-        style: TextStyle(fontSize: 20),
-        decoration: InputDecoration(
+        style: const TextStyle(fontSize: 20),
+        decoration: const InputDecoration(
           counterText: '', // hide character counter
           border: InputBorder.none,
         ),

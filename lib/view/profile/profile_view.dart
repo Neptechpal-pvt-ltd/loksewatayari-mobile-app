@@ -6,6 +6,7 @@ import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class ProfileView extends StatelessWidget {
   List<String> profileAccount = [
     'Edit Account',
@@ -124,7 +125,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.35,
                 child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: profileAccount.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -138,38 +139,36 @@ class ProfileView extends StatelessWidget {
                                   context, Routes.trackProgress);
                           }
                         },
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        child: SvgPicture.asset(
-                                            AssetsPath().profileAccount[index]),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(profileAccount[index]),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child:
-                                        Icon(Icons.arrow_forward_ios_outlined),
-                                  )
-                                ],
-                              ),
-                              const Divider()
-                            ],
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 15),
+                                      child: SvgPicture.asset(
+                                          AssetsPath().profileAccount[index]),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(profileAccount[index]),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child:
+                                      Icon(Icons.arrow_forward_ios_outlined),
+                                )
+                              ],
+                            ),
+                            const Divider()
+                          ],
                         ),
                       );
                     }),
@@ -191,7 +190,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 height: MediaQuery.sizeOf(context).height * 0.70,
                 child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -205,6 +204,7 @@ class ProfileView extends StatelessWidget {
                               Navigator.pushNamed(context, Routes.logIn);
                           }
                         },
+                        // ignore: avoid_unnecessary_containers
                         child: Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

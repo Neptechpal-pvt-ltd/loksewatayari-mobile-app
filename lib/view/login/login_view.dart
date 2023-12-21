@@ -26,63 +26,71 @@ class _LogInViewState extends State<LogInView> {
       builder: (context, authProvider, child) {
         return SafeArea(
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Column(
-              children: [
-                Row(
-                  children: const [
-                    CustomAppbar(),
-                  ],
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Column(
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Row(
                     children: [
-                      Image(image: AssetImage(AssetsPath.logo)),
+                      CustomAppbar(),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Image(
+                        image: AssetImage(AssetsPath.transparentlogo),
+                        height: MediaQuery.of(context).size.height * 0.2,
+                      ),
                       Text(
                         AppString.appName,
                         style: TextStyle(
                           color: AppColor.credentialName,
                           fontWeight: FontWeight.w500,
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.height * 0.035,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height * 0.01),
                         child: Text(
                           AppString.welcome,
                           style: TextStyle(
                             color: AppColor.textFieldTextColor,
-                            fontSize: 18,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.025,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                ),
-                Expanded(
-                  flex: 8,
-                  child: Form(
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
+                  ),
+                  Form(
                     key: _formKey,
                     child: Column(
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.only(left: 12),
                               child: Text(
                                 "UserName",
                                 style: TextStyle(
                                   color: AppColor.credentialName,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.025,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                              top: MediaQuery.of(context).size.height * 0.004),
                           child: TextFormField(
                             cursorColor: AppColor.primaryColor,
                             controller: authProvider.usernameController,
@@ -103,23 +111,30 @@ class _LogInViewState extends State<LogInView> {
                             },
                           ),
                         ),
-                        const Row(
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        Row(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.only(left: 12),
                               child: Text(
                                 "Password",
                                 style: TextStyle(
                                   color: AppColor.credentialName,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.025,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.only(
+                              left: 12,
+                              right: 12,
+                              top: MediaQuery.of(context).size.height * 0.004),
                           child: TextFormField(
                             cursorColor: AppColor.primaryColor,
                             controller: authProvider.passwordController,
@@ -132,19 +147,6 @@ class _LogInViewState extends State<LogInView> {
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              // suffixIcon: IconButton(
-                              //   icon: Icon(
-                              //     _isPasswordVisible
-                              //         ? Icons.visibility
-                              //         : Icons.visibility_off,
-                              //     color: AppColor.primaryTextColor,
-                              //   ),
-                              //   onPressed: () {
-                              //     setState(() {
-                              //       _isPasswordVisible = !_isPasswordVisible;
-                              //     });
-                              //   },
-                              // ),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -155,7 +157,8 @@ class _LogInViewState extends State<LogInView> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.height * 0.01),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -168,7 +171,9 @@ class _LogInViewState extends State<LogInView> {
                                   "Forget Password?",
                                   style: TextStyle(
                                       color: Colors.red,
-                                      fontSize: 14,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.014,
                                       fontWeight: FontWeight.w500),
                                 ),
                               )
@@ -176,19 +181,25 @@ class _LogInViewState extends State<LogInView> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.height * 0.01),
                           child: GestureDetector(
                             onTap: () async {
                               if (_formKey.currentState?.validate() ?? true) {
-                                await authProvider.authenticateUser();
+                                await authProvider.authenticateUser(context);
                                 if (authProvider.isAuthenticated) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('You are logged in'),
-                                      duration: const Duration(seconds: 2),
-                                    ),
-                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text('You are logged in'),
+                                    duration: Duration(seconds: 2),
+                                  ));
                                   Navigator.pushNamed(context, Routes.career);
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text('Wrong username or password'),
+                                    duration: Duration(seconds: 2),
+                                  ));
                                 }
                               }
                             },
@@ -202,69 +213,72 @@ class _LogInViewState extends State<LogInView> {
                       ],
                     ),
                   ),
-                ),
-                const Text("or logIn With"),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 48,
-                  width: 358,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: const Color.fromARGB(255, 169, 171, 171),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
+                  const Text("or logIn With"),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 85),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(14.0),
-                          child: Image(image: AssetImage(AssetsPath.google)),
-                        ),
-                        Text(
-                          AppString.loginwithG,
-                          style: TextStyle(
-                            color: AppColor.credentialName,
-                            fontWeight: FontWeight.bold,
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    width: MediaQuery.of(context).size.width * 0.93,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: const Color.fromARGB(255, 169, 171, 171),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.2),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.height * 0.014),
+                            child: Image(image: AssetImage(AssetsPath.google)),
                           ),
-                        )
+                          Text(
+                            AppString.loginwithG,
+                            style: TextStyle(
+                              color: AppColor.credentialName,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.035,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "Already Have an Account? ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.016,
+                            color: AppColor.textFieldTextColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Sign Up',
+                          style: const TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: AppColor.primaryColor,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, Routes.signUp);
+                            },
+                        ),
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "Already Have an Account? ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          color: AppColor.textFieldTextColor,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'Sign Up',
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: AppColor.primaryColor,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, Routes.signUp);
-                          },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

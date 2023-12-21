@@ -29,7 +29,6 @@ class SelectboxViewModel extends ChangeNotifier {
     _index = newIndex;
   }
 
-
   Dio _dio = Dio();
 
   Future<List<Selectcareers>> getData() async {
@@ -47,10 +46,7 @@ class SelectboxViewModel extends ChangeNotifier {
             .map((item) => Selectcareers.fromJson(item))
             .toList();
 
-        // Do something with the mapped data, or notify listeners
-        print('Data are displayed: $careers');
-
-        // Return the list of Selectcareers
+       
         return careers;
       } else {
         // Handle other response status codes
@@ -62,12 +58,13 @@ class SelectboxViewModel extends ChangeNotifier {
         );
       }
     } catch (e) {
-      // Handle Dio errors or other exceptions
+    
       print('Error during API request: $e');
+    
       if (e is DioError) {
         print('DioError: ${e.response?.statusMessage}');
       }
-      // If an error occurs, you can choose to return an empty list or throw an exception
+
       return [];
     }
   }

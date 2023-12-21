@@ -18,7 +18,7 @@ class CreatePassword extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Create New Password',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -30,26 +30,26 @@ class CreatePassword extends StatelessWidget {
                 letterSpacing: -0.15,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Please enter and confirm your new password. You will need to login after you reset.",
               style: TextStyle(fontSize: 14, color: AppColor.primaryColor),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             TextButtonField(
               controller: passwordController,
               labeltext: "New Password",
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextButtonField(
               controller: confirmpassController,
               labeltext: "Confirm Password",
               obscureText: true,
             ),
-            SizedBox(height: 30),
-            NavButton(
+            const SizedBox(height: 30),
+            const NavButton(
               btnText: "Set New Password",
               color: AppColor.primaryColor,
               textColor: AppColor.primaryTextColor,

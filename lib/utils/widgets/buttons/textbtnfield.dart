@@ -9,7 +9,7 @@ class TextButtonField extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
   final bool showText;
 
-  TextButtonField({
+  const TextButtonField({
     Key? key,
     this.labeltext,
     required this.controller,
@@ -56,7 +56,7 @@ class _TextButtonFieldState extends State<TextButtonField> {
                   ),
                   children: [
                     if (widget.isRequired && widget.controller.text.isEmpty)
-                      TextSpan(
+                      const TextSpan(
                         text: '*',
                         style: TextStyle(
                           color: Colors.red,
@@ -69,10 +69,11 @@ class _TextButtonFieldState extends State<TextButtonField> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 15, right: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15),
           child: TextFormField(
             focusNode: focusNode,
-            obscureText: widget.obscureText == true && !widget.showText,
+            obscureText: widget.obscureText == true && !isPasswordVisible,
+
             cursorColor: AppColor.primaryColor,
             controller: widget.controller,
             decoration: InputDecoration(
@@ -83,7 +84,7 @@ class _TextButtonFieldState extends State<TextButtonField> {
                       : Colors.black, // Use black for other text
                 ),
               ),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.black,
                 ),
@@ -108,18 +109,17 @@ class _TextButtonFieldState extends State<TextButtonField> {
               if (widget.isRequired && (value == null || value.isEmpty)) {
                 return 'This field is required';
               }
-                 if (widget.labeltext == 'Email Address' && !isValidEmail(value)) {
+              if (widget.labeltext == 'Email Address' && !isValidEmail(value)) {
                 return 'Enter a valid email address';
               }
               if (widget.labeltext == 'Password' && !isValidPassword(value)) {
                 return 'Password must be at least 8 characters long and contain 1 special character';
               }
-              return null; 
+              return null;
             },
-
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         )
       ],
@@ -128,9 +128,7 @@ class _TextButtonFieldState extends State<TextButtonField> {
 
   void _updateUI() {
     if (mounted) {
-      setState(() {
-        // Update the UI when the text field value changes
-      });
+      setState(() {});
     }
   }
 

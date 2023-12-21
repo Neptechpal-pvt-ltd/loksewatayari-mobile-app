@@ -9,7 +9,6 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController middlenameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
-// final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   List<GlobalKey<FormState>> formKeys = [
@@ -23,14 +22,16 @@ class AuthProvider extends ChangeNotifier {
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
 
-  Future<void> authenticateUser() async {
-    await Future.delayed(Duration(seconds: 2));
+  bool _isSucess = false;
+  bool get isSucess => _isSucess;
+
+  Future<void> authenticateUser(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 2));
 
     final String username = usernameController.text;
     final String password = passwordController.text;
 
     if (username.isEmpty || password.isEmpty) {
-      print('Username and password are required');
       return;
     }
 
@@ -47,15 +48,26 @@ class AuthProvider extends ChangeNotifier {
       final String? accessToken = prefs.getString('accessToken');
       final String? refreshToken = prefs.getString('refreshToken');
 
-      print(accessToken);
-      print(refreshToken);
     } on DioException catch (e) {
-      print('Dio exception occurred during authentication: $e');
       if (e.response != null) {
-        print('Dio exception response: ${e.response?.data}');
+        final int statusCode = e.response!.statusCode!;
+        if (statusCode == 401 || statusCode == 403 || statusCode == 404) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Wrong username or password'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('An error occurred: ${e.message}'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
       }
     } catch (e) {
-      print('Error occurred during authentication: $e');
     }
   }
 
@@ -78,16 +90,45 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(response.data);
         return Token.fromJson(response.data['tokens']);
       } else {
-        throw DioException(
+        throw DioError(
             requestOptions: RequestOptions(path: ''), response: response);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       throw e;
     }
   }
+
+  // Future<Token> postLogin(String username, String password) async {
+  //   try {
+  //     Dio dio = Dio();
+  //     final Map<String, dynamic> requestData = {
+  //       'username': username,
+  //       'password': password,
+  //     };
+
+  //     Response response = await dio.post(
+  //       'http://loksewa.cb-ashik.me/auth/login',
+  //       data: requestData,
+  //       options: Options(
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       ),
+  //     );
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       print(response.data);
+  //       return Token.fromJson(response.data['tokens']);
+  //     } else {
+  //       throw DioException(
+  //           requestOptions: RequestOptions(path: ''), response: response);
+  //     }
+  //   } on DioError catch (e) {
+  //     throw e;
+  //   }
+  // }
 
   Dio _dio = Dio();
 
@@ -95,7 +136,6 @@ class AuthProvider extends ChangeNotifier {
     try {
       final Map<String, dynamic> requestData = userDetail.toJson();
 
-      print('request data:$requestData');
       Response response = await _dio.post(
         'http://loksewa.cb-ashik.me/auth/register',
         data: requestData,
@@ -107,21 +147,19 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('df:${response.data}');
-        print('Registration successful: ${response.data}');
+        _isSucess = true;
         _isAuthenticated = true;
         notifyListeners();
       } else {
-        print('Registration failed. Response: ${response.data}');
+        _isSucess = false;
         throw DioError(
           requestOptions: RequestOptions(path: ''),
           response: response,
         );
       }
     } catch (e) {
-      print('Dio exception occurred during registration: $e');
+      _isSucess = false;
       if (e is DioError) {
-        print('DioError: ${e.response!.statusMessage}');
       }
       throw e;
     }

@@ -26,7 +26,7 @@ class SignUpView extends StatelessWidget {
                 key: authProvider.formKeys[0],
                 child: Column(
                   children: [
-                    CustomAppbar(),
+                    const CustomAppbar(),
                     Image.asset(
                       AssetsPath.transparentlogo,
                       height: MediaQuery.of(context).size.height * 0.19,
@@ -76,15 +76,6 @@ class SignUpView extends StatelessWidget {
                         onTap: () async {
                           if (authProvider.formKeys.every((formKey) =>
                               formKey.currentState?.validate() ?? true)) {
-                            print(UsersData(
-                              username: authProvider.usernameController.text,
-                              firstName: authProvider.firstnameController.text,
-                              lastName: authProvider.lastnameController.text,
-                              middleName:
-                                  authProvider.middlenameController.text,
-                              email: authProvider.emailController.text,
-                              password: authProvider.passwordController.text,
-                            ));
 
                             await authProvider.register(
                               UsersData(
@@ -99,14 +90,18 @@ class SignUpView extends StatelessWidget {
                               ),
                             );
                             print(authProvider.isAuthenticated);
+                                 if (authProvider.isSucess) {
+                                Navigator.pushNamed(context, Routes.logIn);
+                              }
                             if (authProvider.isAuthenticated) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text('You are registered'),
-                                  duration: const Duration(seconds: 2),
+                                  duration: Duration(seconds: 2),
                                 ),
                               );
-                              Navigator.pushNamed(context, Routes.logIn);
+                         
+                              // Navigator.pushNamed(context, Routes.logIn);
                             } else {
                               print("failed");
                             }
@@ -123,7 +118,7 @@ class SignUpView extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            TextSpan(
+                            const TextSpan(
                               text: 'Already have an account?.',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -132,7 +127,7 @@ class SignUpView extends StatelessWidget {
                             ),
                             TextSpan(
                               text: 'Login',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 decoration: TextDecoration.underline,
                                 fontStyle: FontStyle.italic,
                                 color: AppColor.primaryColor,

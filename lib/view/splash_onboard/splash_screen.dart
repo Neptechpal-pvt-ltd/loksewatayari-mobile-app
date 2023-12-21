@@ -39,9 +39,11 @@ class SplashScreen extends StatelessWidget {
                         await SharedPreferences.getInstance();
                     final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
 
+                    // ignore: unnecessary_null_comparison
                     if (isLoggedIn != null) {
                       // Your existing logic for navigation here
                       isLoggedIn
+                          // ignore: use_build_context_synchronously
                           ? Navigator.pushNamed(context, Routes.career)
                           : Navigator.pushNamed(context, Routes.onboarding);
                     } else {

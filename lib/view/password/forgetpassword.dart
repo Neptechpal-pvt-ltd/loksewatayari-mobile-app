@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
-import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
 import 'package:loksewa/view_model.dart/password/otp_view_model.dart';
@@ -12,11 +11,11 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<OtpInfoViewModel>(
-        builder: (context, emailviewmodel, child) {
+        builder: (context, passwordviewmodel, child) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: Text("Forget Password?"),
+          title: const Text("Forget Password?"),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -30,17 +29,17 @@ class ForgetPassword extends StatelessWidget {
               // ),
               Center(
                   child: Image(
-                image: AssetImage(AssetsPath.lock),
+                image: const AssetImage(AssetsPath.lock),
                 height: MediaQuery.sizeOf(context).height * 0.28,
               )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Enter your email Associated with your account.We will send you a reset link",
                   textAlign: TextAlign.center,
                 ),
               ),
-              Row(
+              const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),
@@ -56,7 +55,7 @@ class ForgetPassword extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
                 child: TextFormField(
                   cursorColor: AppColor.primaryColor,
                   // controller: authProvider.usernameController,
@@ -70,24 +69,25 @@ class ForgetPassword extends StatelessWidget {
                     ),
                   ),
                   onChanged: (value) {
-                    emailviewmodel.updateEmailController(value);
+                    passwordviewmodel.updateEmailController(value);
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
               NavButton(
                 btnText: "Submit",
-                textColor: emailviewmodel.emalController.text != ''
+                textColor: passwordviewmodel.emailController.text != ''
                     ? AppColor.borderColor
                     : AppColor.primaryColor,
-                color: emailviewmodel.emalController.text != ''
+                color: passwordviewmodel.emailController.text != ''
                     ? AppColor.primaryColor
                     : AppColor.borderColor,
                 onClick: () {
-                  Navigator.pushNamed(context, Routes.otpverify);
+                  passwordviewmodel.requestOTP(context);
+                  // Navigator.pushNamed(context, Routes.otpverify);
                 },
               )
             ],
