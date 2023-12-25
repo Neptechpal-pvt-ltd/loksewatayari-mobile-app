@@ -45,17 +45,17 @@ class LatestNews extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   margin: const EdgeInsets.all(8.0),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Image(
                           image: AssetImage(AssetsPath.loksewaTayari),
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 9),
                         child: Text(
                           "May 16,2021",
@@ -63,10 +63,10 @@ class LatestNews extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 9),
-                        child: Container(
+                        padding: EdgeInsets.only(left: 9),
+                        child: SizedBox(
                           width: 250,
-                          child: const Text(
+                          child: Text(
                             "Today's Fresh Objective Questions and Answers on Public Services",
                             style: TextStyle(
                               fontSize: 16,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
@@ -8,12 +9,14 @@ import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 
 class OtpVerify extends StatelessWidget {
+  const OtpVerify({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<OtpInfoViewModel>(builder: (context, otpviewmodel, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Enter OTP'),
+          title: const Text('Enter OTP'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -21,18 +24,18 @@ class OtpVerify extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(
+              const Image(
                 image: AssetImage(
                   AssetsPath.transparentlogo,
                 ),
                 height: 190,
               ),
-              Text(
+              const Text(
                 'Enter the OTP sent to your mobile number',
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   // border: Border.all(color: Colors.black, width: 1),
@@ -42,7 +45,7 @@ class OtpVerify extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: PinInputTextField(
                     decoration: BoxLooseDecoration(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           color: AppColor.primaryColor,
                           fontSize: 20,
                           fontWeight: FontWeight.w600),
@@ -58,17 +61,19 @@ class OtpVerify extends StatelessWidget {
                     onSubmit: (String pin) {
                       // Handle pin submission
                       // For example, you can print the entered OTP:
-                      print('Entered OTP: $pin');
+                      if (kDebugMode) {
+                        print('Entered OTP: $pin');
+                      }
                     },
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(right: 35),
                 child: RichText(
                     textAlign: TextAlign.justify,
-                    text: TextSpan(children: <TextSpan>[
+                    text: const TextSpan(children: <TextSpan>[
                       TextSpan(
                           text: "Didn't get the OTP??",
                           style: TextStyle(
@@ -90,7 +95,7 @@ class OtpVerify extends StatelessWidget {
                               letterSpacing: -0.15)),
                     ])),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               NavButton(

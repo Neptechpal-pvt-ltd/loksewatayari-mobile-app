@@ -45,11 +45,11 @@ class RulesOfPartsOfSpeech extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
+              const SizedBox(
                 // height: 135,
                 width: 358,
                 // color: Colors.green,
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
                     children: [
