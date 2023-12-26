@@ -20,6 +20,7 @@ class Routes {
   static const String qsnPOS = "/QuestionPartsOfSpeech";
   static const String prepareloksewa = "/PrepareLoksewa";
   static const String createpass = "/CreatePassword";
+  static const String mockTestQuestion = "/CreatePassword";
 
 
   static const String trackProgress = "/TrackMyProgress";

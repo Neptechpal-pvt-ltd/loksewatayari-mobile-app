@@ -6,6 +6,7 @@ import 'package:loksewa/view/home_view/homepage.dart';
 import 'package:loksewa/view/login/login_view.dart';
 import 'package:loksewa/view/login/select_career.dart';
 import 'package:loksewa/view/login/select_course.dart';
+import 'package:loksewa/view/mock_test/mock_test.dart';
 import 'package:loksewa/view/password/create_new_password.dart';
 import 'package:loksewa/view/password/forgetpassword.dart';
 import 'package:loksewa/view/password/otpverify.dart';
@@ -25,7 +26,8 @@ class RouterGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => SplashScreen());
-
+      case Routes.mockTestQuestion:
+        return MaterialPageRoute(builder: (_) =>  MockTestQuestion());
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
 
@@ -65,8 +67,10 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) =>  OtpVerify());
       case Routes.forgetpass:
         return MaterialPageRoute(builder: (_) => const ForgetPassword());
-            case Routes.createpass:
+      
+      case Routes.createpass:
         return MaterialPageRoute(builder: (_) =>  CreatePassword());
+      
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
     }
