@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 
 class DownloadResources extends StatelessWidget {
@@ -49,7 +51,7 @@ class DownloadResources extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width * 0.2,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     margin: const EdgeInsets.all(8.0),
                     child: Row(
@@ -59,21 +61,21 @@ class DownloadResources extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(downloadedtexts[index]),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(4.0),
                           child: Row(
                             children: [
                               // ignore: unnecessary_const
-                              const Icon(
-                                Icons.download_sharp,
-                                color: AppColor.primaryColor,
-                              ),
-                              Text(
-                                "Download",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColor.primaryColor),
+                              SvgPicture.asset(AssetsPath.arrow_down),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  "Download",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColor.primaryColor),
+                                ),
                               ),
                             ],
                           ),

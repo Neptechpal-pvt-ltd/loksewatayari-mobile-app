@@ -65,7 +65,7 @@ class SelectCareer extends StatelessWidget {
                               child: Text('Error: ${snapshot.error}'));
                         } else {
                           List<Selectcareers> careers = snapshot.data ?? [];
-                          print(careers[0].title);
+                          // print(careers[0].title);
                           return GridView.count(
                             crossAxisCount: 3,
                             shrinkWrap: true,
@@ -77,7 +77,29 @@ class SelectCareer extends StatelessWidget {
                                 onTap: () {
                                   selectboxViewModel.selectButton(index);
                                   selectboxViewModel.setIndex(index);
-                                  // print(careers[index].title);
+                                  // print(selectboxViewModel
+                                  //     .getSelectedCareer()
+                                  //     .toJson()['id']);
+                                  // selectboxViewModel
+                                  //     .getSelectedCareer()
+                                  //     .toJson()['id'];
+
+                                  // if (selectboxViewModel.getSelectedCareer() !=
+                                  //     null) {
+                                  //   selectboxviewmodel.updateAndPatchData(
+                                  //       selectboxViewModel.getSelectedCareer());
+                                  // }
+                                  // Selectcareers selectedCareer =
+                                  //     selectboxViewModel.getSelectedCareer();
+
+                                  // if (selectedCareer != null) {
+                                  //   print(
+                                  //       'Selected Career Data: ${selectedCareer.toJson()['id']}');
+                                  //   selectboxViewModel
+                                  //       .updateAndPatchData(selectedCareer);
+                                  // } else {
+                                  //   print('No career selected.');
+                                  // }
                                 },
                                 child: Container(
                                   height: 100,

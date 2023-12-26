@@ -4,6 +4,8 @@ import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
+import 'package:loksewa/view_model.dart/theme_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
@@ -29,6 +31,9 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final themeviewmodel = Provider.of<ThemeViewModel>(context).getTheme();
+    // final themeViewModel = context.watch<ThemeViewModel>();
+    final themeViewModel = context.watch<ThemeViewModel>();
     return SafeArea(
       child: Scaffold(
         body: ListView(children: [
@@ -137,20 +142,28 @@ class ProfileView extends StatelessWidget {
                             case 1:
                               Navigator.pushNamed(
                                   context, Routes.trackProgress);
+
+                            case 3:
+                              final isDarkMode =
+                                  themeViewModel.getTheme().brightness ==
+                                      Brightness.dark;
+                              final newTheme = isDarkMode
+                                  ? ThemeData.light()
+                                  : ThemeData.dark();
+                              themeViewModel.setTheme(newTheme);
+                              break;
                           }
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
                                   children: [
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       child: SvgPicture.asset(
                                           AssetsPath().profileAccount[index]),
                                     ),
@@ -162,8 +175,7 @@ class ProfileView extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child:
-                                      Icon(Icons.arrow_forward_ios_outlined),
+                                  child: Icon(Icons.arrow_forward_ios_outlined),
                                 )
                               ],
                             ),

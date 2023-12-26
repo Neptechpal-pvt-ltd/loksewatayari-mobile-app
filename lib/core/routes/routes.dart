@@ -8,7 +8,7 @@ class Routes {
   static const String career = "/SelectCareer";
 
   static const String course = "/SelectCourse";
-  static const String selecteng = "/SelectEngineering";
+  static const String home = "/HomePage";
   static const String dashboard = "/DashBoard";
   static const String result = "/ResultPage";
   static const String askqsn = "/AskQuestion";

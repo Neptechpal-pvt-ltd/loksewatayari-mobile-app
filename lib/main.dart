@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:loksewa/core/routes/router_generator.dart';
 import 'package:loksewa/core/themes/app_theme.dart';
-import 'package:loksewa/view/splash_onboard/splash_screen.dart';
+import 'package:loksewa/view/home_view/dashboard.dart';
+import 'package:loksewa/view/home_view/homepage.dart';
+import 'package:loksewa/view/signup/register_view.dart';
 import 'package:loksewa/view_model.dart/dashboard_view_model.dart';
 import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:loksewa/view_model.dart/onboarding_view_model.dart';
@@ -14,11 +16,13 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeViewModel _themeViewModel = ThemeViewModel(ThemeData.light());
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +39,16 @@ class MyApp extends StatelessWidget {
             create: (_) => DashboardViewModel()),
         ChangeNotifierProvider<OtpInfoViewModel>(
             create: (_) => OtpInfoViewModel()),
-        ChangeNotifierProvider<ThemeViewModel>(
+        ChangeNotifierProvider(
             create: (_) => ThemeViewModel(ThemeData.light())),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
+          darkTheme: _themeViewModel.getTheme(),
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: SplashScreen()),
+          home: DashboardPage()),
     );
   }
 }
