@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
+import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/appbar/custom_appbar.dart';
 import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
@@ -47,7 +48,8 @@ class ResultPage extends StatelessWidget {
                             Colors.grey.withOpacity(0.2), // color of the shadow
                         spreadRadius: 5, // spread radius
                         blurRadius: 12, // blur radius
-                        offset: const Offset(2, 3), // changes position of shadow
+                        offset:
+                            const Offset(2, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -148,18 +150,24 @@ class ResultPage extends StatelessWidget {
                     ],
                   )),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: NavButton(
+                onClick: () {
+                  Navigator.pushNamed(context, Routes.qsnPOS);
+                },
                 btnText: "Play Again",
                 color: AppColor.primaryColor,
                 textColor: AppColor.borderColor,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: NavButton(
                 isOther: true,
+                onClick: () {
+                  Navigator.pushNamed(context, Routes.home);
+                },
                 btnText: "Back to Home",
                 // color: AppColor.primaryColor,
                 textColor: Colors.black,

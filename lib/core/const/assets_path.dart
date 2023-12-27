@@ -90,6 +90,9 @@ class AssetsPath {
 
   //transparent logo
   static const String transparentlogo = '${_imagePath}loksewalogotransparent.png';
+  //
+  static const String arrow_down = '${_iconPath}arrow_down.svg';
+
 
 
 

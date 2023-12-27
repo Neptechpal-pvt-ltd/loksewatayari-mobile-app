@@ -77,6 +77,8 @@ class SelectCourse extends StatelessWidget {
                             return Text('error:${snapshot.error}');
                           } else {
                             List<Selectcareers> careers = snapshot.data ?? [];
+                        
+
                             if (kDebugMode) {
                               print(careers[0].subServices!.length);
                             }
@@ -89,8 +91,39 @@ class SelectCourse extends StatelessWidget {
                                 final isSelected = index ==
                                     selectboxViewModel.selectedButtonIndex;
                                 return GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     selectboxViewModel.selectButton(index);
+                                    Selectcareers selectedSewaService =
+                                        selectboxViewModel.getSelectedCareer();
+
+                                    if (selectedSewaService.subServices !=
+                                            null &&
+                                        selectedSewaService
+                                            .subServices!.isNotEmpty) {
+                                      if (index >= 0 &&
+                                          index <
+                                              selectedSewaService
+                                                  .subServices!.length) {
+                                        SubService selectedSubService =
+                                            selectedSewaService
+                                                .subServices![index];
+
+                                        print(
+                                            'Selected SubService ID: ${selectedSubService.id}');
+                                        print(
+                                            'Selected SewaService ID: ${selectedSewaService.id}');
+
+                                        await selectboxViewModel
+                                            .updateAndPatchData(
+                                          subService: selectedSubService,
+                                          sewaService: selectedSewaService,
+                                        );
+                                      } else {
+                                        print('Invalid index: $index');
+                                      }
+                                    } else {
+                                      print('No subServices available.');
+                                    }
                                   },
                                   child: Container(
                                     height: 56,

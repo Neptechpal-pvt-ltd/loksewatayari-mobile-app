@@ -40,8 +40,8 @@ class _DashboardPageState extends State<DashboardPage>
                   height: MediaQuery.of(context).size.height * 0.07,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40)),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(

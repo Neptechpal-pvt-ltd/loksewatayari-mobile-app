@@ -40,8 +40,11 @@ class SplashScreen extends StatelessWidget {
                         await SharedPreferences.getInstance();
                     final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
 
+                    // ignore: unnecessary_null_comparison
                     if (isLoggedIn != null) {
                       // Your existing logic for navigation here
+
+
                       if (context.mounted) {
                         isLoggedIn
                             ? Navigator.pushNamed(context, Routes.career)

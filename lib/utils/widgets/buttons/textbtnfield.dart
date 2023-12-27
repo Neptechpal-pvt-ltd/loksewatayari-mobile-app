@@ -72,7 +72,8 @@ class _TextButtonFieldState extends State<TextButtonField> {
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: TextFormField(
             focusNode: focusNode,
-            obscureText: widget.obscureText == true && !widget.showText,
+            obscureText: widget.obscureText == true && !isPasswordVisible,
+
             cursorColor: AppColor.primaryColor,
             controller: widget.controller,
             decoration: InputDecoration(
@@ -127,9 +128,7 @@ class _TextButtonFieldState extends State<TextButtonField> {
 
   void _updateUI() {
     if (mounted) {
-      setState(() {
-        // Update the UI when the text field value changes
-      });
+      setState(() {});
     }
   }
 

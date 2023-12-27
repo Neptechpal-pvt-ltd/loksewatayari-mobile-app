@@ -77,6 +77,7 @@ class SignUpView extends StatelessWidget {
                         onTap: () async {
                           if (authProvider.formKeys.every((formKey) =>
                               formKey.currentState?.validate() ?? true)) {
+
                             if (kDebugMode) {
                               print(UsersData(
                                 username: authProvider.usernameController.text,
@@ -90,6 +91,7 @@ class SignUpView extends StatelessWidget {
                               ));
                             }
 
+
                             await authProvider.register(
                               UsersData(
                                 username: authProvider.usernameController.text,
@@ -102,18 +104,27 @@ class SignUpView extends StatelessWidget {
                                 password: authProvider.passwordController.text,
                               ),
                             );
+
+                            print(authProvider.isAuthenticated);
+                                 if (authProvider.isSucess) {
+                                Navigator.pushNamed(context, Routes.logIn);
+                              }
+                            if (authProvider.isAuthenticated) {
+
                             if (kDebugMode) {
                               print(authProvider.isAuthenticated);
                             }
                             if (authProvider.isAuthenticated &&
                                 context.mounted) {
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('You are registered'),
                                   duration: Duration(seconds: 2),
                                 ),
                               );
-                              Navigator.pushNamed(context, Routes.logIn);
+                         
+                              // Navigator.pushNamed(context, Routes.logIn);
                             } else {
                               if (kDebugMode) {
                                 print("failed");

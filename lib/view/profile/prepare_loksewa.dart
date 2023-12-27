@@ -48,8 +48,6 @@ class PrepareLoksewa extends StatelessWidget {
                   itemCount: 3,
                   itemBuilder: (BuildContext context, int index) {
                     int itemIndex = index + 1;
-                    String formattedIndex =
-                        itemIndex.toString().padLeft(2, '0');
                     return GestureDetector(
                       onTap: () {
                         switch (index) {

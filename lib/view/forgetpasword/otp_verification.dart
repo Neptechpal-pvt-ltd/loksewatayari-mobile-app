@@ -1,7 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:dio/dio.dart';
 
-// class EmailVerificationScreen extends StatelessWidget {
+// class EmailVe
+//rificationScreen extends StatelessWidget {
 //   final TextEditingController emailController = TextEditingController();
 
 //   Future<void> sendVerificationEmail() async {

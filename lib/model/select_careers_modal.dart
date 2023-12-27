@@ -32,6 +32,7 @@ class Selectcareers {
     this.forum,
   });
 
+
   factory Selectcareers.fromJson(Map<String, dynamic> json) => Selectcareers(
         id: json["id"],
         title: json["title"],

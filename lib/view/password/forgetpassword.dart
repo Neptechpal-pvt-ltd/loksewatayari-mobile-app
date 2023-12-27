@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
-import 'package:loksewa/core/routes/routes.dart';
 import 'package:loksewa/core/themes/app_color.dart';
 import 'package:loksewa/utils/widgets/buttons/nav_button.dart';
 import 'package:loksewa/view_model.dart/password/otp_view_model.dart';
@@ -12,7 +11,7 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<OtpInfoViewModel>(
-        builder: (context, emailviewmodel, child) {
+        builder: (context, passwordviewmodel, child) {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -70,7 +69,7 @@ class ForgetPassword extends StatelessWidget {
                     ),
                   ),
                   onChanged: (value) {
-                    emailviewmodel.updateEmailController(value);
+                    passwordviewmodel.updateEmailController(value);
                   },
                 ),
               ),
@@ -80,14 +79,15 @@ class ForgetPassword extends StatelessWidget {
 
               NavButton(
                 btnText: "Submit",
-                textColor: emailviewmodel.emalController.text != ''
+                textColor: passwordviewmodel.emailController.text != ''
                     ? AppColor.borderColor
                     : AppColor.primaryColor,
-                color: emailviewmodel.emalController.text != ''
+                color: passwordviewmodel.emailController.text != ''
                     ? AppColor.primaryColor
                     : AppColor.borderColor,
                 onClick: () {
-                  Navigator.pushNamed(context, Routes.otpverify);
+                  passwordviewmodel.requestOTP(context);
+                  // Navigator.pushNamed(context, Routes.otpverify);
                 },
               )
             ],
