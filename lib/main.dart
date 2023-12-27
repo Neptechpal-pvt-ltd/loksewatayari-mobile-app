@@ -20,7 +20,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
             create: (_) => SelectboxViewModel()),
         ChangeNotifierProvider<DashboardViewModel>(
             create: (_) => DashboardViewModel()),
-             ChangeNotifierProvider<OtpInfoViewModel>(
+        ChangeNotifierProvider<OtpInfoViewModel>(
             create: (_) => OtpInfoViewModel()),
         ChangeNotifierProvider<ThemeViewModel>(
             create: (_) => ThemeViewModel(ThemeData.light())),
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: LogInView()),
+          home: const LogInView()),
     );
   }
 }

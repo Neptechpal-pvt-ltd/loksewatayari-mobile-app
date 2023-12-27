@@ -165,6 +165,8 @@ import 'package:provider/provider.dart';
 // }
 
 class TrackMyProgress extends StatelessWidget {
+  const TrackMyProgress({super.key});
+
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<CourseSelectionModel>(context);
@@ -252,7 +254,7 @@ class TrackMyProgress extends StatelessWidget {
                                     Navigator.pushNamed(
                                         context, Routes.prepareloksewa);
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     height: MediaQuery.sizeOf(context).height *
                                         0.13,
                                     width:

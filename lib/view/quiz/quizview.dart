@@ -13,7 +13,7 @@ class QuizView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           SizedBox(
             width: 390,
@@ -106,7 +106,7 @@ class QuizView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                    child: SizedBox(
                       width: 200,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

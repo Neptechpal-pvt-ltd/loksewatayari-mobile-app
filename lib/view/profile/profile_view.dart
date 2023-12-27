@@ -66,7 +66,7 @@ class ProfileView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
+                        child: SizedBox(
                           width: 200,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,10 +121,10 @@ class ProfileView extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.35,
                 child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: profileAccount.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -138,38 +138,33 @@ class ProfileView extends StatelessWidget {
                                   context, Routes.trackProgress);
                           }
                         },
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        child: SvgPicture.asset(
-                                            AssetsPath().profileAccount[index]),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(profileAccount[index]),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child:
-                                        Icon(Icons.arrow_forward_ios_outlined),
-                                  )
-                                ],
-                              ),
-                              const Divider()
-                            ],
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: SvgPicture.asset(
+                                          AssetsPath().profileAccount[index]),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(profileAccount[index]),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(Icons.arrow_forward_ios_outlined),
+                                )
+                              ],
+                            ),
+                            const Divider()
+                          ],
                         ),
                       );
                     }),
@@ -188,10 +183,10 @@ class ProfileView extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.70,
                 child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: profileGeneral.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -202,43 +197,41 @@ class ProfileView extends StatelessWidget {
                                   await SharedPreferences.getInstance();
                               final bool isLoggedIn =
                                   prefs.getBool('isLoggedIn') ?? false;
-                              Navigator.pushNamed(context, Routes.logIn);
+                              if (context.mounted) {
+                                Navigator.pushNamed(context, Routes.logIn);
+                              }
                           }
                         },
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        child: SvgPicture.asset(
-                                            AssetsPath().profileGeneral[index]),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(profileGeneral[index]),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios_outlined,
-                                      size: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: SvgPicture.asset(
+                                          AssetsPath().profileGeneral[index]),
                                     ),
-                                  )
-                                ],
-                              ),
-                              const Divider()
-                            ],
-                          ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(profileGeneral[index]),
+                                  ],
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    size: 4,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Divider()
+                          ],
                         ),
                       );
                     }),

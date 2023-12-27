@@ -2,12 +2,12 @@ import 'dart:convert';
 
 List<Selectcareers> selectcareersFromJson(String str) {
   final jsonData = json.decode(str);
-  return new List<Selectcareers>.from(
+  return List<Selectcareers>.from(
       jsonData.map((x) => Selectcareers.fromJson(x)));
 }
 
 String selectcareersToJson(List<Selectcareers> data) {
-  final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
+  final dyn = List<dynamic>.from(data.map((x) => x.toJson()));
   return json.encode(dyn);
 }
 
@@ -32,15 +32,14 @@ class Selectcareers {
     this.forum,
   });
 
-  factory Selectcareers.fromJson(Map<String, dynamic> json) =>
-      new Selectcareers(
+  factory Selectcareers.fromJson(Map<String, dynamic> json) => Selectcareers(
         id: json["id"],
         title: json["title"],
         status: json["status"],
-        image: json["image"] == null ? null : json["image"],
+        image: json["image"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
-        subServices: new List<SubService>.from(
+        subServices: List<SubService>.from(
             json["subServices"].map((x) => SubService.fromJson(x))),
         forum: json["forum"] == null ? null : Forum.fromJson(json["forum"]),
       );
@@ -49,7 +48,7 @@ class Selectcareers {
         "id": id,
         "title": title,
         "status": status,
-        "image": image == null ? null : image,
+        "image": image,
         "created_at": createdAt,
         "updated_at": updatedAt,
         "subServices": List<dynamic>.from(subServices!.map((x) => x.toJson())),
@@ -74,7 +73,7 @@ class Forum {
     this.updatedAt,
   });
 
-  factory Forum.fromJson(Map<String, dynamic> json) => new Forum(
+  factory Forum.fromJson(Map<String, dynamic> json) => Forum(
         id: json["id"],
         title: json["title"],
         image: json["image"],
@@ -116,29 +115,29 @@ class SubService {
     this.subserviceHasSyllabus,
   });
 
-  factory SubService.fromJson(Map<String, dynamic> json) => new SubService(
+  factory SubService.fromJson(Map<String, dynamic> json) => SubService(
         id: json["id"],
         sewaServiceId: json["sewaService_id"],
         title: json["title"],
-        description: json["description"] == null ? null : json["description"],
-        image: json["image"] == null ? null : json["image"],
+        description: json["description"],
+        image: json["image"],
         status: json["status"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         subserviceHasSyllabus:
-            new List<dynamic>.from(json["subserviceHasSyllabus"].map((x) => x)),
+            List<dynamic>.from(json["subserviceHasSyllabus"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sewaService_id": sewaServiceId,
         "title": title,
-        "description": description == null ? null : description,
-        "image": image == null ? null : image,
+        "description": description,
+        "image": image,
         "status": status,
         "created_at": createdAt,
         "updated_at": updatedAt,
         "subserviceHasSyllabus":
-            new List<dynamic>.from(subserviceHasSyllabus!.map((x) => x)),
+            List<dynamic>.from(subserviceHasSyllabus!.map((x) => x)),
       };
 }

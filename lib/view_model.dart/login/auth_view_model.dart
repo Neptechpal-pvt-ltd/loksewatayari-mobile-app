@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/model/register_modal.dart';
 import 'package:loksewa/model/responsemodel.dart';
@@ -24,13 +25,15 @@ class AuthProvider extends ChangeNotifier {
   bool get isAuthenticated => _isAuthenticated;
 
   Future<void> authenticateUser() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     final String username = usernameController.text;
     final String password = passwordController.text;
 
     if (username.isEmpty || password.isEmpty) {
-      print('Username and password are required');
+      if (kDebugMode) {
+        print('Username and password are required');
+      }
       return;
     }
 
@@ -47,15 +50,25 @@ class AuthProvider extends ChangeNotifier {
       final String? accessToken = prefs.getString('accessToken');
       final String? refreshToken = prefs.getString('refreshToken');
 
-      print(accessToken);
-      print(refreshToken);
+      if (kDebugMode) {
+        print(accessToken);
+      }
+      if (kDebugMode) {
+        print(refreshToken);
+      }
     } on DioException catch (e) {
-      print('Dio exception occurred during authentication: $e');
+      if (kDebugMode) {
+        print('Dio exception occurred during authentication: $e');
+      }
       if (e.response != null) {
-        print('Dio exception response: ${e.response?.data}');
+        if (kDebugMode) {
+          print('Dio exception response: ${e.response?.data}');
+        }
       }
     } catch (e) {
-      print('Error occurred during authentication: $e');
+      if (kDebugMode) {
+        print('Error occurred during authentication: $e');
+      }
     }
   }
 
@@ -78,24 +91,28 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(response.data);
+        if (kDebugMode) {
+          print(response.data);
+        }
         return Token.fromJson(response.data['tokens']);
       } else {
         throw DioException(
             requestOptions: RequestOptions(path: ''), response: response);
       }
-    } on DioException catch (e) {
-      throw e;
+    } on DioException {
+      rethrow;
     }
   }
 
-  Dio _dio = Dio();
+  final Dio _dio = Dio();
 
   Future<void> register(UsersData userDetail) async {
     try {
       final Map<String, dynamic> requestData = userDetail.toJson();
 
-      print('request data:$requestData');
+      if (kDebugMode) {
+        print('request data:$requestData');
+      }
       Response response = await _dio.post(
         'http://loksewa.cb-ashik.me/auth/register',
         data: requestData,
@@ -107,23 +124,33 @@ class AuthProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('df:${response.data}');
-        print('Registration successful: ${response.data}');
+        if (kDebugMode) {
+          print('df:${response.data}');
+        }
+        if (kDebugMode) {
+          print('Registration successful: ${response.data}');
+        }
         _isAuthenticated = true;
         notifyListeners();
       } else {
-        print('Registration failed. Response: ${response.data}');
-        throw DioError(
+        if (kDebugMode) {
+          print('Registration failed. Response: ${response.data}');
+        }
+        throw DioException(
           requestOptions: RequestOptions(path: ''),
           response: response,
         );
       }
     } catch (e) {
-      print('Dio exception occurred during registration: $e');
-      if (e is DioError) {
-        print('DioError: ${e.response!.statusMessage}');
+      if (kDebugMode) {
+        print('Dio exception occurred during registration: $e');
       }
-      throw e;
+      if (e is DioException) {
+        if (kDebugMode) {
+          print('DioException: ${e.response!.statusMessage}');
+        }
+      }
+      rethrow;
     }
   }
 }

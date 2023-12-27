@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
@@ -70,12 +71,15 @@ class SelectCourse extends StatelessWidget {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (snapshot.hasError) {
                             return Text('error:${snapshot.error}');
                           } else {
                             List<Selectcareers> careers = snapshot.data ?? [];
-                            print(careers[0].subServices!.length);
+                            if (kDebugMode) {
+                              print(careers[0].subServices!.length);
+                            }
                             final indexs =
                                 Provider.of<SelectboxViewModel>(context)
                                     .getindex;

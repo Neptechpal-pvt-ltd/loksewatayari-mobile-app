@@ -49,9 +49,10 @@ class EditAccount extends StatelessWidget {
             Expanded(
               flex: 2,
               child: ListView(
-                physics: NeverScrollableScrollPhysics(), // Set physics property
+                physics:
+                    const NeverScrollableScrollPhysics(), // Set physics property
                 shrinkWrap: true,
-                children: [
+                children: const [
                   NavButton(
                     btnText: "Save Changes",
                     color: AppColor.primaryColor,
