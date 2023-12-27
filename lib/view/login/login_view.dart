@@ -10,10 +10,12 @@ import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LogInView extends StatefulWidget {
-  LogInView({Key? key});
+  const LogInView({super.key});
 
   @override
-  _LogInViewState createState() => _LogInViewState();
+  _LogInViewState createState() {
+    return _LogInViewState();
+  }
 }
 
 class _LogInViewState extends State<LogInView> {
@@ -26,11 +28,20 @@ class _LogInViewState extends State<LogInView> {
       builder: (context, authProvider, child) {
         return SafeArea(
           child: Scaffold(
-            resizeToAvoidBottomInset: true,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Row(
+
+       
+            resizeToAvoidBottomInset: false,
+            body: Column(
+              children: [
+                const Row(
+                  children: [
+                    CustomAppbar(),
+                  ],
+                ),
+                const Expanded(
+                  flex: 4,
+                  child: Column(
+
                     children: [
                       CustomAppbar(),
                     ],
@@ -52,6 +63,7 @@ class _LogInViewState extends State<LogInView> {
                       Padding(
                         padding: EdgeInsets.all(
                             MediaQuery.of(context).size.height * 0.01),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           AppString.welcome,
                           style: TextStyle(
@@ -157,8 +169,7 @@ class _LogInViewState extends State<LogInView> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.height * 0.01),
+                          padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -167,7 +178,7 @@ class _LogInViewState extends State<LogInView> {
                                   Navigator.pushNamed(
                                       context, Routes.forgetpass);
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Forget Password?",
                                   style: TextStyle(
                                       color: Colors.red,
@@ -186,13 +197,18 @@ class _LogInViewState extends State<LogInView> {
                           child: GestureDetector(
                             onTap: () async {
                               if (_formKey.currentState?.validate() ?? true) {
-                                await authProvider.authenticateUser(context);
-                                if (authProvider.isAuthenticated) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text('You are logged in'),
-                                    duration: Duration(seconds: 2),
-                                  ));
+
+
+                                await authProvider.authenticateUser();
+                                if (authProvider.isAuthenticated &&
+                                    context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('You are logged in'),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+
                                   Navigator.pushNamed(context, Routes.career);
                                 } else {
                                   ScaffoldMessenger.of(context)
@@ -217,6 +233,7 @@ class _LogInViewState extends State<LogInView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
+
                   Container(
                     height: MediaQuery.of(context).size.height * 0.06,
                     width: MediaQuery.of(context).size.width * 0.93,
@@ -236,6 +253,21 @@ class _LogInViewState extends State<LogInView> {
                             padding: EdgeInsets.all(
                                 MediaQuery.of(context).size.height * 0.014),
                             child: Image(image: AssetImage(AssetsPath.google)),
+
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 85),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(14.0),
+                          child: Image(image: AssetImage(AssetsPath.google)),
+                        ),
+                        Text(
+                          AppString.loginwithG,
+                          style: TextStyle(
+                            color: AppColor.credentialName,
+                            fontWeight: FontWeight.bold,
+
                           ),
                           Text(
                             AppString.loginwithG,
@@ -248,6 +280,7 @@ class _LogInViewState extends State<LogInView> {
                       ),
                     ),
                   ),
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.035,
                   ),
@@ -273,6 +306,28 @@ class _LogInViewState extends State<LogInView> {
                             ..onTap = () {
                               Navigator.pushNamed(context, Routes.signUp);
                             },
+
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: <TextSpan>[
+                      const TextSpan(
+                        text: "Already Have an Account? ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          color: AppColor.textFieldTextColor,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Sign Up',
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: AppColor.primaryColor,
+
                         ),
                       ],
                     ),

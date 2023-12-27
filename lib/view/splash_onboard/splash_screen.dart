@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
@@ -6,7 +7,7 @@ import 'package:loksewa/core/themes/app_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +43,19 @@ class SplashScreen extends StatelessWidget {
                     // ignore: unnecessary_null_comparison
                     if (isLoggedIn != null) {
                       // Your existing logic for navigation here
-                      isLoggedIn
-                          // ignore: use_build_context_synchronously
-                          ? Navigator.pushNamed(context, Routes.career)
-                          : Navigator.pushNamed(context, Routes.onboarding);
+
+
+                      if (context.mounted) {
+                        isLoggedIn
+                            ? Navigator.pushNamed(context, Routes.career)
+                            : Navigator.pushNamed(context, Routes.onboarding);
+                      }
                     } else {
                       // Handle the case where the value is null
                       // You might want to handle this differently based on your application logic
-                      print('The value of isLoggedIn is null');
+                      if (kDebugMode) {
+                        print('The value of isLoggedIn is null');
+                      }
                     }
                   },
                   child: const CircularProgressIndicator(

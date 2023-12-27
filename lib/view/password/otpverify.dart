@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/routes/routes.dart';
@@ -8,6 +9,8 @@ import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 
 class OtpVerify extends StatelessWidget {
+  const OtpVerify({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<OtpInfoViewModel>(builder: (context, otpviewmodel, child) {
@@ -58,7 +61,9 @@ class OtpVerify extends StatelessWidget {
                     onSubmit: (String pin) {
                       // Handle pin submission
                       // For example, you can print the entered OTP:
-                      print('Entered OTP: $pin');
+                      if (kDebugMode) {
+                        print('Entered OTP: $pin');
+                      }
                     },
                   ),
                 ),

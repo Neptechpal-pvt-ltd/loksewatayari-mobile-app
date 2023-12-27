@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/app_string.dart';
 import 'package:loksewa/core/const/assets_path.dart';
@@ -10,6 +11,8 @@ import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SelectCareer extends StatelessWidget {
+  const SelectCareer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SelectboxViewModel>(
@@ -59,13 +62,18 @@ class SelectCareer extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
                           return Center(
                               child: Text('Error: ${snapshot.error}'));
                         } else {
                           List<Selectcareers> careers = snapshot.data ?? [];
-                          // print(careers[0].title);
+
+      
+                          if (kDebugMode) {
+                            print(careers[0].title);
+                          }
                           return GridView.count(
                             crossAxisCount: 3,
                             shrinkWrap: true,

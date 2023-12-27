@@ -48,7 +48,8 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: _themeViewModel.getTheme(),
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: DashboardPage()),
+
+          home: const LogInView()),
     );
   }
 }

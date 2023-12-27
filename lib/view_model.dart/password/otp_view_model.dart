@@ -6,17 +6,26 @@ class OtpInfoViewModel extends ChangeNotifier {
   TextEditingController _otpController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
+  final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+
   TextEditingController get otpController => _otpController;
   updateOtpController(String value) {
     _otpController.text = value;
     notifyListeners();
   }
 
+
   TextEditingController get emailController => _emailController;
+
+  TextEditingController get emalController => _emailController;
+
   updateEmailController(String value) {
     _emailController.text = value;
     notifyListeners();
   }
+
 
   Future<void> requestOTP(BuildContext context) async {
     final Dio dio = Dio();
@@ -31,5 +40,6 @@ class OtpInfoViewModel extends ChangeNotifier {
     } catch (e) {
     }
   }
+
 
 }

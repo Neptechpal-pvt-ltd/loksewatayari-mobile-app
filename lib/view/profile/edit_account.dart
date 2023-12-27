@@ -12,12 +12,54 @@ class EditAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const CustomAppbar(
-                text: "Edit Account",
+
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            const CustomAppbar(
+              text: "Edit Account",
+            ),
+            const CircleAvatar(
+              radius: 40,
+              backgroundImage: AssetImage(AssetsPath.profile),
+            ),
+            FormTextField(
+              title: "Full Name",
+              hinttxt: "Enter your Full Name",
+            ),
+            FormTextField(
+              title: "Email Address",
+              hinttxt: "Enter your email Address",
+            ),
+            FormTextField(
+              title: "Phone Number",
+              hinttxt: "Enter your Phone Number",
+            ),
+            FormTextField(
+              title: "Address",
+              hinttxt: "Enter your Address",
+            ),
+            FormTextField(
+              title: "Career",
+              hinttxt: "Select Career",
+            ),
+            FormTextField(
+              title: "Courses",
+              hinttxt: "Select Course",
+            ),
+            Expanded(
+              flex: 2,
+              child: ListView(
+                physics:
+                    const NeverScrollableScrollPhysics(), // Set physics property
+                shrinkWrap: true,
+                children: const [
+                  NavButton(
+                    btnText: "Save Changes",
+                    color: AppColor.primaryColor,
+                    textColor: AppColor.borderColor,
+                  ),
+                ],
               ),
               const CircleAvatar(
                 radius: 40,

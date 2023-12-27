@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/model/select_careers_modal.dart';
 
@@ -32,6 +33,9 @@ class SelectboxViewModel extends ChangeNotifier {
 
   Dio _dio = Dio();
 
+  final Dio _dio = Dio();
+
+
   Future<List<Selectcareers>> getData() async {
     try {
       // Make the API request
@@ -41,11 +45,18 @@ class SelectboxViewModel extends ChangeNotifier {
 
       // Check if the response status is successful
       if (response.statusCode == 200 || response.statusCode == 201) {
+
         // print(response.data);
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
         // Map the JSON data to your model
         careers = (response.data as List<dynamic>)
             .map((item) => Selectcareers.fromJson(item))
             .toList();
+
 
         return careers;
       } else {
@@ -53,15 +64,42 @@ class SelectboxViewModel extends ChangeNotifier {
         // print(
         //     'Failed to fetch data: Status Code: ${response.statusCode}, Response: ${response.data}');
         throw DioError(
+
+        // Do something with the mapped data, or notify listeners
+        if (kDebugMode) {
+          print('Data are displayed: $careers');
+        }
+
+        // Return the list of Selectcareers
+        return careers;
+      } else {
+        // Handle other response status codes
+        if (kDebugMode) {
+          print(
+              'Failed to fetch data: Status Code: ${response.statusCode}, Response: ${response.data}');
+        }
+        throw DioException(
+
           requestOptions: RequestOptions(path: ''),
           response: response,
         );
       }
     } catch (e) {
+
       print('Error during API request: $e');
 
       if (e is DioError) {
         print('DioError: ${e.response?.statusMessage}');
+
+      // Handle Dio errors or other exceptions
+      if (kDebugMode) {
+        print('Error during API request: $e');
+      }
+      if (e is DioException) {
+        if (kDebugMode) {
+          print('DioException: ${e.response?.statusMessage}');
+        }
+
       }
 
       return [];

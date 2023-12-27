@@ -42,7 +42,7 @@ class PrepareLoksewa extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: 400,
               child: ListView.builder(
                   itemCount: 3,

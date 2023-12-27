@@ -32,12 +32,12 @@ class Selectcareers {
     this.forum,
   });
 
-  factory Selectcareers.fromJson(Map<String, dynamic> json) =>
-      Selectcareers(
+
+  factory Selectcareers.fromJson(Map<String, dynamic> json) => Selectcareers(
         id: json["id"],
         title: json["title"],
         status: json["status"],
-        image: json["image"] == null ? null : json["image"],
+        image: json["image"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         subServices: List<SubService>.from(
@@ -49,7 +49,7 @@ class Selectcareers {
         "id": id,
         "title": title,
         "status": status,
-        "image": image == null ? null : image,
+        "image": image,
         "created_at": createdAt,
         "updated_at": updatedAt,
         "subServices": List<dynamic>.from(subServices!.map((x) => x.toJson())),
@@ -120,8 +120,8 @@ class SubService {
         id: json["id"],
         sewaServiceId: json["sewaService_id"],
         title: json["title"],
-        description: json["description"] == null ? null : json["description"],
-        image: json["image"] == null ? null : json["image"],
+        description: json["description"],
+        image: json["image"],
         status: json["status"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
@@ -133,8 +133,8 @@ class SubService {
         "id": id,
         "sewaService_id": sewaServiceId,
         "title": title,
-        "description": description == null ? null : description,
-        "image": image == null ? null : image,
+        "description": description,
+        "image": image,
         "status": status,
         "created_at": createdAt,
         "updated_at": updatedAt,

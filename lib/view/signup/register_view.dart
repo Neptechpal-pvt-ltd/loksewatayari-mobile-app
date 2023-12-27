@@ -1,4 +1,5 @@
 // Import the Dio package
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
@@ -12,7 +13,7 @@ import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({Key? key});
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +78,20 @@ class SignUpView extends StatelessWidget {
                           if (authProvider.formKeys.every((formKey) =>
                               formKey.currentState?.validate() ?? true)) {
 
+                            if (kDebugMode) {
+                              print(UsersData(
+                                username: authProvider.usernameController.text,
+                                firstName:
+                                    authProvider.firstnameController.text,
+                                lastName: authProvider.lastnameController.text,
+                                middleName:
+                                    authProvider.middlenameController.text,
+                                email: authProvider.emailController.text,
+                                password: authProvider.passwordController.text,
+                              ));
+                            }
+
+
                             await authProvider.register(
                               UsersData(
                                 username: authProvider.usernameController.text,
@@ -89,11 +104,19 @@ class SignUpView extends StatelessWidget {
                                 password: authProvider.passwordController.text,
                               ),
                             );
+
                             print(authProvider.isAuthenticated);
                                  if (authProvider.isSucess) {
                                 Navigator.pushNamed(context, Routes.logIn);
                               }
                             if (authProvider.isAuthenticated) {
+
+                            if (kDebugMode) {
+                              print(authProvider.isAuthenticated);
+                            }
+                            if (authProvider.isAuthenticated &&
+                                context.mounted) {
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('You are registered'),
@@ -103,7 +126,9 @@ class SignUpView extends StatelessWidget {
                          
                               // Navigator.pushNamed(context, Routes.logIn);
                             } else {
-                              print("failed");
+                              if (kDebugMode) {
+                                print("failed");
+                              }
                             }
                           }
                         },
