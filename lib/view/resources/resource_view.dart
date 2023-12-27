@@ -118,12 +118,10 @@ class ResourcesView extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xff101828)
-                              .withOpacity(0.1), 
-                          spreadRadius: 0, 
-                          blurRadius: 8, 
-                          offset: const Offset(
-                              0, 4), 
+                          color: const Color(0xff101828).withOpacity(0.1),
+                          spreadRadius: 0,
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
@@ -133,7 +131,7 @@ class ResourcesView extends StatelessWidget {
                           AssetsPath.loksewaTayari,
                           height: MediaQuery.sizeOf(context).height * 0.12,
                         ),
-                        Container(
+                        SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.5,
                           child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

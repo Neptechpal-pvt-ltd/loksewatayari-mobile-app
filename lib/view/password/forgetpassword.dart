@@ -16,7 +16,7 @@ class ForgetPassword extends StatelessWidget {
       return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: Text("Forget Password?"),
+          title: const Text("Forget Password?"),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -30,17 +30,17 @@ class ForgetPassword extends StatelessWidget {
               // ),
               Center(
                   child: Image(
-                image: AssetImage(AssetsPath.lock),
+                image: const AssetImage(AssetsPath.lock),
                 height: MediaQuery.sizeOf(context).height * 0.28,
               )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Enter your email Associated with your account.We will send you a reset link",
                   textAlign: TextAlign.center,
                 ),
               ),
-              Row(
+              const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.all(8.0),
@@ -56,7 +56,7 @@ class ForgetPassword extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
                 child: TextFormField(
                   cursorColor: AppColor.primaryColor,
                   // controller: authProvider.usernameController,
@@ -74,7 +74,7 @@ class ForgetPassword extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 

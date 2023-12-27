@@ -10,10 +10,12 @@ import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LogInView extends StatefulWidget {
-  LogInView({Key? key});
+  const LogInView({super.key});
 
   @override
-  _LogInViewState createState() => _LogInViewState();
+  _LogInViewState createState() {
+    return _LogInViewState();
+  }
 }
 
 class _LogInViewState extends State<LogInView> {
@@ -29,12 +31,12 @@ class _LogInViewState extends State<LogInView> {
             resizeToAvoidBottomInset: false,
             body: Column(
               children: [
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     CustomAppbar(),
                   ],
                 ),
-                Expanded(
+                const Expanded(
                   flex: 4,
                   child: Column(
                     children: [
@@ -48,7 +50,7 @@ class _LogInViewState extends State<LogInView> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           AppString.welcome,
                           style: TextStyle(
@@ -155,7 +157,7 @@ class _LogInViewState extends State<LogInView> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -164,7 +166,7 @@ class _LogInViewState extends State<LogInView> {
                                   Navigator.pushNamed(
                                       context, Routes.forgetpass);
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Forget Password?",
                                   style: TextStyle(
                                       color: Colors.red,
@@ -181,11 +183,12 @@ class _LogInViewState extends State<LogInView> {
                             onTap: () async {
                               if (_formKey.currentState?.validate() ?? true) {
                                 await authProvider.authenticateUser();
-                                if (authProvider.isAuthenticated) {
+                                if (authProvider.isAuthenticated &&
+                                    context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       content: Text('You are logged in'),
-                                      duration: const Duration(seconds: 2),
+                                      duration: Duration(seconds: 2),
                                     ),
                                   );
                                   Navigator.pushNamed(context, Routes.career);
@@ -217,12 +220,12 @@ class _LogInViewState extends State<LogInView> {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 85),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 85),
                     child: Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(14.0),
+                          padding: EdgeInsets.all(14.0),
                           child: Image(image: AssetImage(AssetsPath.google)),
                         ),
                         Text(
@@ -242,7 +245,7 @@ class _LogInViewState extends State<LogInView> {
                 RichText(
                   text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(
+                      const TextSpan(
                         text: "Already Have an Account? ",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -252,7 +255,7 @@ class _LogInViewState extends State<LogInView> {
                       ),
                       TextSpan(
                         text: 'Sign Up',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontStyle: FontStyle.italic,
                           color: AppColor.primaryColor,
                         ),
