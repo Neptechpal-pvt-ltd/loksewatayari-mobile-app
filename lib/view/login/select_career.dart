@@ -83,7 +83,7 @@ class SelectCareer extends StatelessWidget {
                                 onTap: () {
                                   selectboxViewModel.selectButton(index);
                                   selectboxViewModel.setIndex(index);
-                                  // print(careers[index].title);
+                                 
                                 },
                                 child: Container(
                                   height: 100,
@@ -118,34 +118,29 @@ class SelectCareer extends StatelessWidget {
                   },
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.course);
+              Consumer<SelectboxViewModel>(
+                builder: (context, selectboxViewModel, _) {
+                  final isContinueButtonPurple =
+                      selectboxViewModel.selectedButtonIndex != -1;
+              
+                  return NavButton(
+                    btnText: "Continue",
+                    color: isContinueButtonPurple
+                        ? AppColor.primaryColor
+                        : AppColor.borderColor,
+                    textColor: isContinueButtonPurple
+                        ? AppColor.borderColor
+                        : AppColor.primaryColor,
+                    onClick: () {
+                      if (selectboxViewModel.selectedButtonIndex != -1) {
+                        selectboxViewModel.clearSelection();
+                      } else {
+                        selectboxViewModel.selectButton(0);
+                      }
+                      Navigator.pushNamed(context, Routes.course);
+                    },
+                  );
                 },
-                child: Consumer<SelectboxViewModel>(
-                  builder: (context, selectboxViewModel, _) {
-                    final isContinueButtonPurple =
-                        selectboxViewModel.selectedButtonIndex != -1;
-
-                    return NavButton(
-                      btnText: "Continue",
-                      color: isContinueButtonPurple
-                          ? AppColor.primaryColor
-                          : AppColor.borderColor,
-                      textColor: isContinueButtonPurple
-                          ? AppColor.borderColor
-                          : AppColor.primaryColor,
-                      onClick: () {
-                        if (selectboxViewModel.selectedButtonIndex != -1) {
-                          selectboxViewModel.clearSelection();
-                        } else {
-                          selectboxViewModel.selectButton(0);
-                        }
-                        Navigator.pushNamed(context, Routes.course);
-                      },
-                    );
-                  },
-                ),
               ),
             ],
           ),
