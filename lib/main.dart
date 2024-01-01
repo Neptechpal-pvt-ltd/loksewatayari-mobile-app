@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:loksewa/core/routes/router_generator.dart';
 import 'package:loksewa/core/themes/app_theme.dart';
-import 'package:loksewa/view/login/login_view.dart';
+import 'package:loksewa/view/splash_onboard/splash_screen.dart';
 import 'package:loksewa/view_model.dart/dashboard_view_model.dart';
 import 'package:loksewa/view_model.dart/login/auth_view_model.dart';
 import 'package:loksewa/view_model.dart/onboarding_view_model.dart';
@@ -11,6 +11,9 @@ import 'package:loksewa/view_model.dart/selectcareer_view_model.dart';
 import 'package:loksewa/view_model.dart/selectcoursemodel.dart';
 import 'package:loksewa/view_model.dart/theme_view_model.dart';
 import 'package:provider/provider.dart';
+
+import 'network/dio_helper.dart';
+import 'view_model.dart/mock_test_view_model.dart';
 
 void main() async {
   await GetStorage.init();
@@ -22,6 +25,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DioHelper.init();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
@@ -37,13 +42,16 @@ class MyApp extends StatelessWidget {
             create: (_) => OtpInfoViewModel()),
         ChangeNotifierProvider<ThemeViewModel>(
             create: (_) => ThemeViewModel(ThemeData.light())),
+        ChangeNotifierProvider<MockTestViewModel>(
+            create: (_) => MockTestViewModel()),
       ],
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           onGenerateRoute: (settings) => RouterGenerator.getRoute(settings),
-          home: const LogInView()),
+          home: SplashScreen()),
+
     );
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:loksewa/core/const/assets_path.dart';
 import 'package:loksewa/core/themes/app_color.dart';
+import 'package:loksewa/utils/widgets/card/mock_test_rules.dart';
 import 'package:loksewa/utils/widgets/card/partsof_speech.dart/rules.dart';
 
 class TopicSelection extends StatelessWidget {
   final List<String> notesTitle = [
     'Parts Of Speech',
+    'Mock Test',
     'Use of Preposition',
     'Basic Grammatical Structure',
     'Direct and Indirect Speech',
@@ -14,6 +16,7 @@ class TopicSelection extends StatelessWidget {
   ];
 
   final List<ImageProvider<Object>> imageNotes = [
+    const AssetImage(AssetsPath.partsofSpeech),
     const AssetImage(AssetsPath.partsofSpeech),
     const AssetImage(AssetsPath.prepo),
     const AssetImage(AssetsPath.partsofSpeech),
@@ -61,6 +64,14 @@ class TopicSelection extends StatelessWidget {
                               return Container(
                                   color: Colors.amber,
                                   child: const RulesOfPartsOfSpeech());
+                            });
+                       case 1:
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                  color: Colors.amber,
+                                  child: const MockTestRules());
                             });
                     }
                   },
