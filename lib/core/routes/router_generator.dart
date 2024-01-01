@@ -41,6 +41,8 @@ class RouterGenerator {
       case Routes.course:
         return MaterialPageRoute(builder: (_) => SelectCourse());
 
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) => HomePage());
       case Routes.selecteng:
         return MaterialPageRoute(builder: (_) => HomePage());
       case Routes.dashboard:

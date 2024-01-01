@@ -78,7 +78,7 @@ class SelectCourse extends StatelessWidget {
                           } else {
                             List<Selectcareers> careers = snapshot.data ?? [];
                             if (kDebugMode) {
-                              print(careers[0].subServices!.length);
+                              // print(careers[0].subServices!.length);
                             }
                             final indexs =
                                 Provider.of<SelectboxViewModel>(context)
@@ -91,6 +91,11 @@ class SelectCourse extends StatelessWidget {
                                 return GestureDetector(
                                   onTap: () {
                                     selectboxViewModel.selectButton(index);
+
+                                    selectboxViewModel.setcarrertitle(
+                                        careers[indexs]
+                                            .subServices![indexs]
+                                            .title!);
                                   },
                                   child: Container(
                                     height: 56,
@@ -109,7 +114,7 @@ class SelectCourse extends StatelessWidget {
                                           left: 20, top: 13),
                                       child: Text(
                                         careers[indexs]
-                                            .subServices![index]
+                                            .subServices![indexs]
                                             .title!,
                                         style: TextStyle(
                                           fontSize: 16,
@@ -129,27 +134,22 @@ class SelectCourse extends StatelessWidget {
                     },
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
+                NavButton(
+                  btnText: "Continue",
+                  color: isContinueButtonPurple
+                      ? AppColor.primaryColor
+                      : AppColor.borderColor,
+                  textColor: isContinueButtonPurple
+                      ? AppColor.borderColor
+                      : AppColor.primaryColor,
+                  onClick: () {
+                    if (selectboxViewModel.selectedButtonIndex != -1) {
+                      selectboxViewModel.clearSelection();
+                    } else {
+                      selectboxViewModel.selectButton(0);
+                    }
                     Navigator.pushNamed(context, Routes.dashboard);
                   },
-                  child: NavButton(
-                    btnText: "Continue",
-                    color: isContinueButtonPurple
-                        ? AppColor.primaryColor
-                        : AppColor.borderColor,
-                    textColor: isContinueButtonPurple
-                        ? AppColor.borderColor
-                        : AppColor.primaryColor,
-                    onClick: () {
-                      if (selectboxViewModel.selectedButtonIndex != -1) {
-                        selectboxViewModel.clearSelection();
-                      } else {
-                        selectboxViewModel.selectButton(0);
-                      }
-                      Navigator.pushNamed(context, Routes.dashboard);
-                    },
-                  ),
                 ),
               ],
             ),

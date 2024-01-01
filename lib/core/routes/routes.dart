@@ -6,6 +6,8 @@ class Routes {
   static const String signUp = "/SignUpView";
 
   static const String career = "/SelectCareer";
+  static const String home = "/HomePage";
+
 
   static const String course = "/SelectCourse";
   static const String selecteng = "/SelectEngineering";

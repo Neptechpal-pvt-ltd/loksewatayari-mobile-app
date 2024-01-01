@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:loksewa/model/select_careers_modal.dart';
 
 class SelectboxViewModel extends ChangeNotifier {
+  List<Selectcareers> careers = [];
   final TextEditingController _selectCareer = TextEditingController();
   TextEditingController get careerController => _selectCareer;
   int selectedButtonIndex = -1;
@@ -42,7 +43,7 @@ class SelectboxViewModel extends ChangeNotifier {
       // Check if the response status is successful
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (kDebugMode) {
-          print(response.data);
+          // print(response.data);
         }
         // Map the JSON data to your model
         List<Selectcareers> careers = (response.data as List<dynamic>)
@@ -51,7 +52,7 @@ class SelectboxViewModel extends ChangeNotifier {
 
         // Do something with the mapped data, or notify listeners
         if (kDebugMode) {
-          print('Data are displayed: $careers');
+          // print('Data are displayed: $careers');
         }
 
         // Return the list of Selectcareers
@@ -77,8 +78,18 @@ class SelectboxViewModel extends ChangeNotifier {
           print('DioException: ${e.response?.statusMessage}');
         }
       }
-      // If an error occurs, you can choose to return an empty list or throw an exception
+
       return [];
     }
+  }
+
+
+
+  String? _careertitle;
+  String get careertitle => _careertitle!;
+
+  void setcarrertitle(String careertitle) {
+    this._careertitle = careertitle;
+    notifyListeners();
   }
 }
