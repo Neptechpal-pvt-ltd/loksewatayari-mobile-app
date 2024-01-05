@@ -83,7 +83,8 @@ class QsnOfPartsOFSpeech extends StatelessWidget {
                   ),
                   child: const Center(
                     child: Text(
-                      "Find the Suitable verb for the given noun “fright”",
+
+                      "Find the Suitable verb for the given noun ”fright” ",
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w500),

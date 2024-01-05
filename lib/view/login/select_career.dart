@@ -69,9 +69,9 @@ class SelectCareer extends StatelessWidget {
                               child: Text('Error: ${snapshot.error}'));
                         } else {
                           List<Selectcareers> careers = snapshot.data ?? [];
-                          if (kDebugMode) {
-                            print(careers[0].title);
-                          }
+                          // if (kDebugMode) {
+                          //   print(careers[0].title);
+                          // }
                           return GridView.count(
                             crossAxisCount: 3,
                             shrinkWrap: true,
