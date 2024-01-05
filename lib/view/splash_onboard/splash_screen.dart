@@ -48,8 +48,7 @@ class SplashScreen extends StatelessWidget {
                             : Navigator.pushNamed(context, Routes.onboarding);
                       }
                     } else {
-                      // Handle the case where the value is null
-                      // You might want to handle this differently based on your application logic
+                    
                       if (kDebugMode) {
                         print('The value of isLoggedIn is null');
                       }

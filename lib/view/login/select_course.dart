@@ -47,6 +47,7 @@ class SelectCourse extends StatelessWidget {
                           fontSize: 28,
                         ),
                         textAlign: TextAlign.center,
+                        
                       ),
                       Padding(
                         padding: EdgeInsets.all(14.0),
@@ -78,7 +79,7 @@ class SelectCourse extends StatelessWidget {
                           } else {
                             List<Selectcareers> careers = snapshot.data ?? [];
                             if (kDebugMode) {
-                              // print(careers[0].subServices!.length);
+                           
                             }
                             final indexs =
                                 Provider.of<SelectboxViewModel>(context)
@@ -94,7 +95,7 @@ class SelectCourse extends StatelessWidget {
 
                                     selectboxViewModel.setcarrertitle(
                                         careers[indexs]
-                                            .subServices![indexs]
+                                            .subServices![index]
                                             .title!);
                                   },
                                   child: Container(
@@ -114,7 +115,7 @@ class SelectCourse extends StatelessWidget {
                                           left: 20, top: 13),
                                       child: Text(
                                         careers[indexs]
-                                            .subServices![indexs]
+                                            .subServices![index]
                                             .title!,
                                         style: TextStyle(
                                           fontSize: 16,

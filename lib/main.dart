@@ -117,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -127,6 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
